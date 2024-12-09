@@ -93,7 +93,7 @@ export default function HeroSection() {
 
           {/* Swap Button */}
           <div>
-            <button className="bg-blue-500 text-white p-4 rounded-full shadow-md hover:bg-blue-600">
+            <button className="bg-[#3563E9] text-xl text-white p-4 rounded-full shadow-md hover:bg-blue-600">
               ↔
             </button>
           </div>
