@@ -3,7 +3,6 @@ import Footer from '@/components/Footer';
 import HeroSection from '@/components/Hero';
 import PopularCars from '@/components/PopularCars';
 import RecommendationCars from '@/components/RecommendationCars';
-import FilterSection from '@/components/Filter';
 
 
 export default function Home() {
@@ -11,7 +10,6 @@ export default function Home() {
     <>
     <Navbar />
     <HeroSection />
-    <FilterSection />
     <PopularCars />
     <RecommendationCars />
     <Footer />

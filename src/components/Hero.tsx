@@ -2,46 +2,129 @@ import Image from "next/image";
 
 export default function HeroSection() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 px-6">
-      <div className="bg-[repeating-radial-gradient(circle,_#54A6FF_0px,_#54A6FF_60px,__40px,_#65AFFF_80px)] text-white p-6 max-w-[600px] h-[360px] mt-[32px] ml-[34px] rounded-[10px] bg-[position:right_bottom] bg-[size:100%_200%]">
-        <h2 className="text-2xl mb-4 font-[600] text-[32px] leading-[48px] tracking-[-3%]">
+    <div className="container mx-auto px-4 py-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Left Card */}
+          <div
+            className="bg-blue-100 p-6 rounded-lg shadow-md"
+            style={{
+              backgroundImage: 'url("/bl.jpg")',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          >
+             <h2 className="text-white text-2xl mb-4 font-[600] text-[32px] leading-[48px] tracking-[-3%]">
           The Best Platform <br />
           for Car Rental
         </h2>
-        <p className="font-[500] text-[16px] leading-[24px] tracking-[-2%]">
+        <p className="font-[500] text-white text-[16px] leading-[24px] tracking-[-2%]">
           Ease of doing a car rental safely and <br /> reliably, of course at a
           low price.
         </p>
-        <button className="mt-4 bg-[#3563E9] text-blue-500 w-[120px] h-[44px] rounded-[4px] px-[20px] gap-[8px]">
+        <button className="mt-4 bg-[#3563E9] text-white w-[120px] h-[44px] rounded-[4px] px-[20px] gap-[8px]">
           Rental Car
         </button>
-        <Image
-          src="/heroone.png"
-          alt="Car"
-          className="absolute top-[380px] left-[200px]"
-          width={390}
-          height={108}
-        />
-      </div>
-      <div className="bg-[#3563E9] bg-[repeating-linear-gradient(45deg,_#3563E9_0px,_#3563E9_20px,_#4A78FF_20px,_#4A78FF_40px)] text-white p-6 max-w-[600px] h-[360px] mt-[32px] ml-[34px] rounded-[10px]">
-        <h2 className="font-[600] text-[32px] leading-[48px] tracking-[-3%] mb-4">
+            <Image
+              src="/heroone.png"
+              alt="Car"
+              height={600}
+              width={600}
+              className="mt-4 w-full max-w-[440px] mx-auto object-cover"
+            />
+          </div>
+
+          {/* Right Card */}
+          <div
+            className="bg-blue-200 p-6 rounded-lg shadow-md"
+            style={{
+              backgroundImage: 'url("/br.jpg")',
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          >
+            <h2 className="font-[600] text-[#FFFFFF] text-[32px] leading-[48px] tracking-[-3%] mb-4">
           Easy way to rent a <br /> car at a low price
         </h2>
-        <p className="font-[500] text-[16px] leading-[24px] tracking-[-2%]">
+        <p className="font-[500] text-[16px] text-[#FFFFFF] leading-[24px] tracking-[-2%]">
           Providing cheap car rental services <br /> and safe and comfortable
           facilities.
         </p>
         <button className="mt-4 bg-[#54A6FF] text-white w-[120px] h-[44px] rounded-[4px] px-[20px] gap-[8px]">
           Rental Car
         </button>
-        <Image
-          src="/herotwo.png"
-          alt="Car"
-          width={340}
-          height={108}
-          className="absolute top-[380px] left-[892px]"
-        />
-      </div>
+            <Image
+              src="/herotwo.png"
+              alt="Car"
+              height={500}
+              width={500}
+              className="mt-4 w-full max-w-[340px] mx-auto object-cover"
+            />
+          </div>
+        </div>
+
+         {/* Booking Section */}
+         <div className="flex flex-col md:flex-row items-center gap-4 mt-8 bg-white p-6 rounded-lg shadow-md">
+          {/* Pick-Up Section */}
+          <div className="flex-1">
+            <h3 className="text-lg font-medium mb-2">Pick-Up</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-sm mb-1">Locations</label>
+                <select className="w-full border rounded-md p-2">
+                  <option>Select your city</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm mb-1">Date</label>
+                <input
+                  type="date"
+                  className="w-full border rounded-md p-2"
+                />
+              </div>
+              <div>
+                <label className="block text-sm mb-1">Time</label>
+                <input
+                  type="time"
+                  className="w-full border rounded-md p-2"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Swap Button */}
+          <div>
+            <button className="bg-blue-500 text-white p-4 rounded-full shadow-md hover:bg-blue-600">
+              ↔
+            </button>
+          </div>
+
+          {/* Drop-Off Section */}
+          <div className="flex-1">
+            <h3 className="text-lg font-medium mb-2">Drop-Off</h3>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-sm mb-1">Locations</label>
+                <select className="w-full border rounded-md p-2">
+                  <option>Select your city</option>
+                </select>
+              </div>
+              <div>
+                <label className="block text-sm mb-1">Date</label>
+                <input
+                  type="date"
+                  className="w-full border rounded-md p-2"
+                />
+              </div>
+              <div>
+                <label className="block text-sm mb-1">Time</label>
+                <input
+                  type="time"
+                  className="w-full border rounded-md p-2"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
   );
 }
