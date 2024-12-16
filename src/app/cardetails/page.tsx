@@ -56,7 +56,7 @@ const recentCars: CarType[] = [
     id: "1",
     name: "Koenigsegg",
     type: "Sport",
-    image: "/Koenigsegg.png",
+    image: "/koenigsegg.png",
     isFavorite: true,
     specs: {
       gasoline: "90L",

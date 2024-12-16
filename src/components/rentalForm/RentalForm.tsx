@@ -174,7 +174,7 @@ export const RentalForm: React.FC = () => {
                 PayPal
               </span>
               <Image
-                src="/paypal.png"
+                src="/Paypal.png"
                 alt="PayPal"
                 width={100}
                 height={100}
@@ -193,7 +193,7 @@ export const RentalForm: React.FC = () => {
                 Bitcoin
               </span>
               <Image
-                src="/bitcoin.png"
+                src="/Bitcoin.png"
                 alt="Bitcoin"
                 width={100}
                 height={100}
