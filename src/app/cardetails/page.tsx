@@ -209,21 +209,21 @@ const page = () => {
               {/* Thumbnails directly below the main image */}
               <div className="flex lg:space-x-4 max-sm:space-x-8 mt-3">
                 <Image
-                  src="/view 1.png"
+                  src="/View.png"
                   alt="Thumbnail 1"
                   width={200}
                   height={200}
                   className="w-[160px] h-[108px] rounded-lg"
                 />
                 <Image
-                  src="/view 2.png"
+                  src="/View2.png"
                   alt="Thumbnail 2"
                   width={100}
                   height={100}
                   className="w-[160px] h-[108px] rounded-lg"
                 />
                 <Image
-                  src="/view 3.png"
+                  src="/view1.png"
                   alt="Thumbnail 3"
                   width={100}
                   height={100}
