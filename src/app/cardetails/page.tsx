@@ -223,7 +223,7 @@ const page = () => {
                   className="w-[160px] h-[108px] rounded-lg"
                 />
                 <Image
-                  src="/view1.png"
+                  src="/View1.png"
                   alt="Thumbnail 3"
                   width={100}
                   height={100}
