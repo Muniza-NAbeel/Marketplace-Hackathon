@@ -16,6 +16,12 @@ const config: Config = {
         white: "#FFFFFF",
         secondary: "#C3D4E9",
         red: "#FF4423",
+        bg: "#F6F7F9",
+        star: "#FBAD39",
+      },
+      width: {
+        md: '1440px', // Custom large width
+        sm: '375px',  // Custom small width
       },
     },
   },
