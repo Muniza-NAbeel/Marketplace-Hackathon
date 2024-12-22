@@ -32,7 +32,7 @@ export const RentalSummary: React.FC<RentalSummaryProps> = ({
           className="object-contain shrink-0 max-w-full aspect-[1.22] w-[132px]"
         />
         <div className="flex overflow-hidden flex-col my-auto">
-          <h3 className="text-2xl font-bold tracking-tighter text-gray-900">
+          <h3 className="md:text-2xl text-xl font-bold tracking-tighter text-gray-900">
             {carName}
           </h3>
           <div className="flex flex-wrap overflow-hidden gap-4 items-center mt-2 min-h-[24px]">
@@ -84,24 +84,24 @@ export const RentalSummary: React.FC<RentalSummaryProps> = ({
       </div>
 
       <div className="flex gap-12 justify-between px-4 py-3 mt-8 rounded-xl bg-neutral-100">
-        <div className="text-sm font-medium tracking-tight text-slate-400">
+        <div className="md:text-sm text-xs font-medium tracking-tight text-slate-400">
           Apply promo code
         </div>
-        <button className="text-base font-semibold tracking-tight text-right text-[#1A202C] hover:underline-offset-1 ">
+        <button className="md:text-base text-xs font-semibold tracking-tight text-right text-[#1A202C] hover:underline-offset-1 ">
           Apply now
         </button>
       </div>
 
       <div className="flex max-md:gap-3 items-start mt-8">
         <div className="flex flex-col min-w-[240px] w-[284px]">
-          <h4 className="text-lg font-[700px] tracking-tight text-[#1A202C]">
+          <h4 className="text-lg  font-[700px] tracking-tight text-[#1A202C]">
             Total Rental Price
           </h4>
           <p className="mt-1 text-sm font-medium tracking-tight text-slate-400">
             Overall price and includes rental discount
           </p>
         </div>
-        <div className="w-32 md:text-xl font-[700px] text-right text-gray-900">
+        <div className="w-32 md:text-xl text-sm font-[700px] text-right text-gray-900">
           ${total.toFixed(2)}
         </div>
       </div>
