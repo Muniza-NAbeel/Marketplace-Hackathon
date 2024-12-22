@@ -13,7 +13,7 @@ export const RentalSummary: React.FC<RentalSummaryProps> = ({
   return (
     <div className="flex overflow-hidden flex-col p-6 mx-auto w-full bg-white rounded-xl">
       <div className="flex flex-col sm:max-w-full">
-        <h2 className="text-xl font-bold tracking-tight text-gray-900">
+        <h2 className="md:text-xl text-lg font-bold tracking-tight text-gray-900">
           Rental Summary
         </h2>
         <p className="mt-1 text-sm font-medium tracking-tight leading-5 text-slate-400">
