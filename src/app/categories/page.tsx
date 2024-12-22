@@ -204,9 +204,9 @@ export default function Categories() {
 
           <div className="col-span-3 flex flex-col gap-8 ">
             {/* Pick-Up Section */}
-            <div className="flex flex-col md:flex-row items-center justify-between gap-5 mt-[32px] relative">
+            <div className="md:flex-row items-center justify-center gap-5 mt-[32px] relative flex flex-col lg:flex-row lg:gap-8 p-4">
               {/* Pickup Section */}
-              <div className="flex-1 bg-white p-6 rounded-lg shadow-md max-sm:w-[420px] w-[582px]">
+              <div className=" flex-1 bg-white p-6 rounded-lg shadow-md w-[552px] h-[132px] max-sm:w-[100%] max-sm:mb-4">
                 <div className="flex items-center space-x-2">
                   <div className="flex justify-center items-center px-1 w-4 h-4 bg-blue-400 bg-opacity-30 rounded-[70px] relative">
                     <div className="absolute top-1/2 w-4 h-4 bg-blue rounded-full border-4 border-secondary transform -translate-y-1/2"></div>
@@ -244,17 +244,17 @@ export default function Categories() {
               </div>
 
               {/* Arrow Icon Section */}
-              <div className="absolute top-[50%] left-[50%] transform translate-x-[-50%] translate-y-[-50%] flex items-center justify-center hover:bg-[#54A6FF] active:bg-[#294db9] active:scale-95 transition-all bg-[#3563E9] w-[60px] h-[60px] rounded-[10px] shadow-xl">
-               
-              <Link href={"/cardetails"}>
-              <button className="text-white text-2xl rotate-90 ">
-                  <GoArrowSwitch />
-                </button>
-              </Link>
+              
+              <div className="absolute top-[50%] left-[50%] transform translate-x-[-50%] translate-y-[-50%] flex items-center justify-center bg-[#3563E9] w-[60px] h-[60px] rounded-[10px] shadow-xl">
+                <Link href={"/cardetails"}>
+                  <button className="text-white text-2xl rotate-90">
+                    <GoArrowSwitch />
+                  </button>
+                </Link>
               </div>
 
               {/* Drop-Off Section */}
-              <div className="flex-1 bg-white p-6 rounded-lg shadow-md max-sm:w-[420px] w-[582px]">
+              <div className="flex-1 bg-white p-6 rounded-lg shadow-md w-[582px] max-sm:w-[100%]">
                 <div className="flex items-center space-x-2">
                   <div className="flex justify-center items-center px-1 w-4 h-4 bg-blue-400 bg-opacity-30 rounded-[70px] relative">
                     <div className="absolute top-1/2 w-4 h-4 bg-blue rounded-full border-4 border-secondary transform -translate-y-1/2"></div>
@@ -377,15 +377,13 @@ export default function Categories() {
               </div>
             </div>
             <section className="button w-full text-center mb-10">
-        <button className="gap-2 self-start p-[10px] px-3 py-2 mt-1 text-base font-medium tracking-tight text-center text-white bg-[#3563E9] rounded min-h-[10px] w-[130px] whitespace-nowrap hover:bg-[#54A6FF] active:bg-[#3563E9] active:scale-95 transition-all">Show more car</button>
-      </section>
+              <button className="gap-2 self-start p-[10px] py-2 mt-1 text-base font-medium tracking-tight text-center text-white bg-[#3563E9] rounded min-h-[10px] w-[130px] whitespace-nowrap hover:bg-[#54A6FF] active:bg-[#3563E9] active:scale-95 transition-all">
+                Show more car
+              </button>
+            </section>
           </div>
-          
         </div>
-        
       </section>
-
-      
     </>
   );
 }

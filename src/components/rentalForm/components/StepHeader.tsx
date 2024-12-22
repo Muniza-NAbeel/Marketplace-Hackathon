@@ -12,7 +12,7 @@ export const StepHeader: React.FC<StepHeaderProps> = ({ title, subtitle, step, }
       {subtitle}
     </p>
   </div>
-  <div className="text-sm font-medium tracking-tight text-right text-slate-400 max-md:mt-0">
+  <div className="text-sm font-medium tracking-tight text-right text-slate-400 mt-0">
     {step}
   </div>
 </div>

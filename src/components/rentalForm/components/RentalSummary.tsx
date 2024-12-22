@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { RentalSummaryProps } from '../types';
-import Image from 'next/image';
+import * as React from "react";
+import { RentalSummaryProps } from "../types";
+import Image from "next/image";
 
 export const RentalSummary: React.FC<RentalSummaryProps> = ({
   carName,
@@ -8,19 +8,20 @@ export const RentalSummary: React.FC<RentalSummaryProps> = ({
   reviews,
   subtotal,
   tax,
-  total
+  total,
 }) => {
   return (
     <div className="flex overflow-hidden flex-col p-6 mx-auto w-full bg-white rounded-xl">
-  <div className="flex flex-col sm:max-w-full">
-    <h2 className="text-xl font-bold tracking-tight text-gray-900">
-      Rental Summary
+      <div className="flex flex-col sm:max-w-full">
+        <h2 className="text-xl font-bold tracking-tight text-gray-900">
+          Rental Summary
         </h2>
         <p className="mt-1 text-sm font-medium tracking-tight leading-5 text-slate-400">
-          Prices may change depending on the length of the rental and the price of your rental car.
+          Prices may change depending on the length of the rental and the price
+          of your rental car.
         </p>
       </div>
-      
+
       <div className="flex gap-4 self-start mt-8">
         <Image
           loading="lazy"
@@ -34,7 +35,7 @@ export const RentalSummary: React.FC<RentalSummaryProps> = ({
           <h3 className="text-2xl font-bold tracking-tighter text-gray-900">
             {carName}
           </h3>
-          <div className="flex overflow-hidden gap-4 items-center mt-2 min-h-[24px]">
+          <div className="flex flex-wrap overflow-hidden gap-4 items-center mt-2 min-h-[24px]">
             <div className="flex overflow-hidden gap-0.5 items-center self-stretch my-auto">
               {[...Array(rating)].map((_, i) => (
                 <Image
@@ -42,14 +43,14 @@ export const RentalSummary: React.FC<RentalSummaryProps> = ({
                   loading="lazy"
                   src="/star1.png"
                   alt=""
-                  height={6}
-                  width={6}
+                  height={8}
+                  width={8}
                   className="object-contain shrink-0 self-stretch my-auto w-3 aspect-square"
                 />
               ))}
-              {[...Array(5-rating)].map((_, i) => (
+              {[...Array(5 - rating)].map((_, i) => (
                 <Image
-                  key={i+rating}
+                  key={i + rating}
                   loading="lazy"
                   src="/star2.png"
                   alt=""
@@ -67,14 +68,14 @@ export const RentalSummary: React.FC<RentalSummaryProps> = ({
       </div>
 
       <hr className="shrink-0 mt-8 h-px border border-solid border-text-[rgba(195,212,233,0.4)]" />
-      
+
       <div className="flex gap-36 items-start mt-8 text-base tracking-tight whitespace-nowrap">
         <div className="font-medium  text-slate-400 w-[116px]">Subtotal</div>
         <div className="font-semibold text-right pr-0 text-gray-900 w-[116px]">
           ${subtotal.toFixed(2)}
         </div>
       </div>
-      
+
       <div className="flex gap-36 items-start mt-6 text-base tracking-tight whitespace-nowrap">
         <div className="font-medium text-slate-400 w-[116px]">Tax</div>
         <div className="font-semibold text-right text-gray-900 w-[116px]">
@@ -91,7 +92,7 @@ export const RentalSummary: React.FC<RentalSummaryProps> = ({
         </button>
       </div>
 
-      <div className="flex gap-3 items-start mt-8">
+      <div className="flex max-md:gap-3 items-start mt-8">
         <div className="flex flex-col min-w-[240px] w-[284px]">
           <h4 className="text-lg font-[700px] tracking-tight text-[#1A202C]">
             Total Rental Price
@@ -100,7 +101,7 @@ export const RentalSummary: React.FC<RentalSummaryProps> = ({
             Overall price and includes rental discount
           </p>
         </div>
-        <div className="w-32 text-xl font-[700px] text-right text-gray-900">
+        <div className="w-32 md:text-xl font-[700px] text-right text-gray-900">
           ${total.toFixed(2)}
         </div>
       </div>

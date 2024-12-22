@@ -20,8 +20,8 @@ const config: Config = {
         star: "#FBAD39",
       },
       width: {
-        md: '1440px', // Custom large width
-        sm: '375px',  // Custom small width
+        md: '1440px', 
+        sm: '375px', 
       },
     },
   },

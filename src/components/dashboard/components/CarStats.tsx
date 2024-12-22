@@ -3,7 +3,7 @@ import { CarStatProps } from '../types';
 
 export const CarStats: React.FC<CarStatProps> = ({ color, type, count }) => {
   return (
-    <div className="flex gap-9 items-center">
+    <div className="flex md:gap-9 gap-2 items-center">
       <div className="flex gap-3 items-center self-stretch my-auto text-justify text-[#90A3BF]">
         <div className={`flex shrink-0 self-stretch  my-auto w-3 h-3 ${color} rounded-[70px]`} />
         <div className="self-stretch my-auto w-[90px] max-sm:w-[180px]">{type}</div>

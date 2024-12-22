@@ -99,10 +99,10 @@ export default function RecommendationCars() {
   ];
 
   return (
-    <div className="max-w-[1440px] h-auto gap-[20px] p-10">
+    <div className="max-w-[1440px] h-auto gap-[20px] p-4">
       {/* Header */}
       <div className="flex justify-between items-center max-w-[1312px] h-[64px] rounded-[4px] px-6 gap-[32px]">
-        <h2 className="text-[#90A3BF] text-xl font-semibold mb-6">
+        <h2 className="text-[#90A3BF] text-md md:text-xl font-semibold mb-6">
           Recommendation Cars
         </h2>
       </div>
@@ -177,13 +177,13 @@ export default function RecommendationCars() {
         ))}
       </div>
 
-      <div className="flex justify-center mt-6 relative w-full">
+      <div className="flex justify-center mt-10 relative w-full mb-10">
         <Link href={"/categories"}>
-          <h1 className="bg-[#3563E9] flex justify-center items-center text-white w-[156px] h-[44px] rounded-[4px] px-[20px] gap-[8px] font-semibold text-[16px] leading-[24px] tracking-[-2%] text-center hover:bg-[#3895ff] active:bg-[#3563E9] active-scale-95 transition-all">
+          <h1 className="bg-[#3563E9] flex justify-center items-center text-white text-sm md:text-lg w-[120px] md:w-[156px] h-[44px] rounded-[4px] px-[4px] gap-[12px] font-semibold leading-[24px] tracking-[-2%] text-center hover:bg-[#3895ff] active:bg-[#3563E9] active-scale-95 transition-all">
             Show more car
           </h1>
         </Link>
-        <h1 className="absolute right-0 text-[#90A3BF] text-[14px] font-[500] leading-[21px] tracking-[-2%]">
+        <h1 className="absolute right-6 mt-2 text-[#90A3BF] text-[14px] font-[500] leading-[21px] tracking-[-2%]">
           120 car
         </h1>
       </div>

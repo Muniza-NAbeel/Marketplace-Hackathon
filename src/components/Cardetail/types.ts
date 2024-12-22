@@ -23,6 +23,7 @@ export interface CarType {
     rating: number;
     avatar: string;
     comment: string;
+    className: string;
   }
   
   export interface CarTypeOption {

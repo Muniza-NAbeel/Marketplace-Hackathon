@@ -4,6 +4,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from '@/components/Navbar';
 import Footer from "@/components/Footer";
+import FooterHandler from "@/components/FooterHandler";
 
 
 // Local Fonts
@@ -42,7 +43,7 @@ export default function RootLayout({
       >
         <Navbar />
         {children}
-        <Footer />
+        <FooterHandler />
       </body>
     </html>
   );

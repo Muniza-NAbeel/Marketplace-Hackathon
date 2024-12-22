@@ -35,7 +35,6 @@ export default function Navbar() {
           </button>
         </div>
       </div>
-     
 
       {/* Right Section */}
       <div className="hidden md:flex justify-center md:justify-end items-center gap-4 mt-4 md:mt-0 w-full md:w-auto ">
@@ -59,4 +58,3 @@ export default function Navbar() {
     </nav>
   );
 }
-

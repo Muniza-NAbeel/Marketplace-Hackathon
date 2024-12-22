@@ -66,12 +66,12 @@ export default function PopularCars() {
   return (
     <div className="max-w-[1440px] h-auto gap-[20px] p-4">
       <div className="flex justify-between items-center max-w-[1312px] h-[64px] rounded-[4px] px-6 gap-[32px]">
-        <h2 className="text-[#90A3BF] text-xl font-bold mb-6">
+        <h2 className="text-[#90A3BF]  text-md md:text-xl font-bold mb-6">
           Popular Cars
         </h2>
 
         <Link href={"/categories"}>
-        <h2 className="text-[#3563E9] text-xl font-semibold mb-6 text-center text-[16px] leading-[20.16px] hover:underline underline-offset-1 hover:text-[#3895ff] active:text-secondary active:scale-95 transition-all hover:cursor-pointer">
+        <h2 className="text-[#3563E9] text-md md:text-xl font-semibold mb-6 text-center text-[16px] leading-[20.16px] hover:underline underline-offset-1 hover:text-[#3895ff] active:text-secondary active:scale-95 transition-all hover:cursor-pointer">
           View All
         </h2>
         </Link>

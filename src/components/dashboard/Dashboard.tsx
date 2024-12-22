@@ -51,12 +51,12 @@ const carStats = [
 
 export default function DashboardPage() {
   return (
-    <div className="overflow-hidden pr-8 bg-neutral-100 max-md:pr-5">
+    <div className="overflow-hidden md:pr-8 bg-neutral-100 max-md:pr-5">
       <div className="flex gap-5 max-sm:gap-1 max-md:flex-col">
         {/* Left Sidebar */}
 
-        <div className="hidden md:flex flex-col w-[21%] h-[900px] max-md:ml-0 max-md:w-full">
-          <div className="overflow-hidden flex-col px-[32px] h-[900px] pt-[36px] pb-12 gap-[32px] mx-auto w-full text-justify bg-white border-r border-solid border-r-gray-100 max-md:mt-8">
+        <div className="hidden md:flex flex-col w-[21%] h-[830px] max-md:ml-0 max-md:w-full">
+          <div className="overflow-hidden flex-col px-[32px] h-[900px] pt-[36px] pb-10 gap-[32px] mx-auto w-full text-justify bg-white border-r border-solid border-r-gray-100 ">
             {/* Main Menu */}
             <div>
               <h2 className="text-[#90A3BF] text-[16px] mt-2 leading-[24px] tracking-[-0.02em] font-medium text-justify w-[286px] h-[28px] uppercase mb-4">
@@ -200,7 +200,7 @@ export default function DashboardPage() {
             <div>
               <a
                 href="#"
-                className="flex items-center mt-[76px] text-[#90A3BF] hover:text-red rounded-lg py-2 px-3"
+                className="flex items-center mt-[120px] text-[#90A3BF] hover:text-red rounded-lg py-2 px-3"
               >
                 <TbLogout2 className="w-6 h-6 mr-3 " />
                 Log Out
@@ -210,7 +210,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Middle Section */}
-        <div className="flex flex-col ml-5 mt-8 w-[534px] max-md:ml-0 max-w-[534px] max-md:w-full max-sm:px-4">
+        <div className="flex flex-col ml-5 md:mt-8 w-[534px] max-md:ml-0 max-w-[534px] max-md:w-full max-sm:px-4">
           <div className="flex flex-col self-stretch bg-white rounded-xl p-5 max-md:mt-6 max-md:py-5 max-md:px-3 max-sm:px-5">
             {/* Title */}
             <div className="self-start font-bold text-[20px] leading-[30px] tracking-[-0.03em] w-[192px] h-[24px]">
@@ -224,11 +224,31 @@ export default function DashboardPage() {
               alt="Rental car details"
               height={1000}
               width={1000}
-              className="object-contain mt-4 h-[272px] rounded-xl aspect-[1.79] w-full"
+              className="object-contain mt-4 h-[150%] rounded-xl aspect-[1.79] w-[150%]"
             />
 
-          {/* Pick-up Details */}
-          <div className="flex gap-2 items-center self-start mt-4">
+            {/* Car Details */}
+            <div className="flex flex-row items-center gap-4 mb-4 mt-4 md:mt-6 md:mb-6">
+              <Image src="/Look.png" alt="Car" width={132} height={70} />
+              <div className="text-center sm:text-left">
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                  <h3 className="font-bold text-lg lg:text-2xl mb-1 sm:mb-0">
+                    Nissan GT - R
+                  </h3>
+                  <p className="text-gray-500 text-sm lg:text-md lg:ml-10 lg:mt-0 mt-1">
+                    #9761
+                  </p>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 mt-2">
+                  <p className="text-gray-500 text-sm sm:text-left lg:text-md">
+                    Sport Car
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Pick-up Details */}
+            <div className="flex gap-2 items-center self-start mt-4">
               <div className="flex justify-center items-center self-stretch px-1 my-auto w-4 h-4 bg-blue-600 bg-opacity-30 rounded-[70px]">
                 <div className="flex justify-center items-center px-1 w-4 h-4 bg-blue-400 bg-opacity-30 rounded-[70px] relative">
                   <div className="absolute top-1/2 w-4 h-4 bg-blue rounded-full border-4 border-secondary transform -translate-y-1/2"></div>
@@ -268,7 +288,7 @@ export default function DashboardPage() {
             </div>
 
             {/* Drop-off Details */}
-            <div className="flex gap-2 items-center self-start mt-12 mb-4">
+            <div className="flex gap-2 items-center self-start mt-6 mb-2">
               {/* Blue Dot Section */}
               <div className="flex justify-center items-center self-stretch px-1 my-auto w-4 h-4 bg-blue-400 bg-opacity-30 rounded-[70px]">
                 <div className="flex justify-center items-center px-1 w-4 h-4 bg-blue-400 bg-opacity-30 rounded-[70px] relative">
@@ -309,88 +329,84 @@ export default function DashboardPage() {
               </div>
             </div>
 
-
-
             {/* Separator */}
-            <div className="mt-10 border-t border-[#C3D4E9]"></div>
+            <div className="mt-8 border-t border-[#C3D4E9]"></div>
 
             {/* Total Rental Price */}
-            <div className="mt-14 flex justify-between items-center">
+            <div className="mt-8 flex justify-between items-center">
               <div className="text-lg font-bold text-[#1A202C]">
                 Total Rental Price
               </div>
               <div className="text-xl font-bold text-[#1A202C]">$80.00</div>
             </div>
-            <div className="mt-1 text-sm text-[#90A3BF] mb-[36px]">
+            <div className="mt-1 text-sm text-[#90A3BF] mb-6">
               Overall price includes rental discount
             </div>
           </div>
         </div>
 
         {/* Right Section */}
-        <div className="flex flex-col ml-2 max-md:w-full max-md:mt-10 mt-4 ">
-        <div className="flex flex-col mt-4 max-w-[524px] self-stretch max-md:max-w-full max-sm:px-4">
-  <div className="flex overflow-hidden flex-col p-6 w-full bg-white rounded-xl max-md:px-5 max-sm:px-10 max-md:max-w-full ">
-    {/* Header */}
-    <div className="flex justify-between items-start text-xl font-bold tracking-tight text-gray-900 max-md:max-w-full">
-      <div className="text-[#1A202C] text-[20px] leading-[30px] tracking-[-0.03em] font-[700]">
-        Top 5 Car Rental
-      </div>
-      <Image
-        loading="lazy"
-        src="/more.png"
-        alt=""
-        height={24}
-        width={24}
-        className="object-contain shrink-0 w-6 aspect-square"
-      />
-    </div>
+        <div className="flex flex-col ml-2 max-md:w-full max-md:mt-10 ">
+          <div className="flex flex-col md:mt-8 max-w-[524px] self-stretch max-md:max-w-full max-sm:px-3">
+            <div className="flex overflow-hidden flex-col p-6 w-full bg-white rounded-xl max-md:px-5 max-sm:px-4 max-md:max-w-full ">
+              {/* Header */}
+              <div className="flex justify-between items-start text-xl font-bold tracking-tight text-gray-900 max-md:max-w-full">
+                <div className="text-[#1A202C] text-[20px] leading-[30px] tracking-[-0.03em] font-[700]">
+                  Top 5 Car Rental
+                </div>
+                <Image
+                  loading="lazy"
+                  src="/more.png"
+                  alt=""
+                  height={24}
+                  width={24}
+                  className="object-contain shrink-0 w-6 aspect-square"
+                />
+              </div>
 
-    {/* Small Screen Specific Changes */}
-    <div className="max-md:mt-10 max-sm:mt-2 max-md:max-w-full">
-      <div className="flex gap-10 mt-8 max-sm:flex-col max-sm:mt-2 max-sm:gap-0">
-        {/* Chart Section */}
-        <div className="flex justify-center items-center relative w-[210px] h-[210px] mx-auto max-sm:mt-6 max-sm:px-5 max-md:py-20 text-center rounded-md aspect-square max-md:px-5 max-md:mt-6">
-          <Image
-            loading="lazy"
-            src="/Chart.png"
-            alt="Car rental statistics"
-            height={327}
-            width={327}
-            className="object-cover absolute inset-0"
-          />
-          <div className="flex relative flex-col items-center w-full text-center">
-            <div className="text-2xl font-bold tracking-tighter text-[#1A202C]">
-              72,030
+              {/* Small Screen Specific Changes */}
+              <div className="max-md:mt-10 max-sm:mt-2 max-md:max-w-full">
+                <div className="flex md:gap-10 mt-8 max-sm:flex-col max-sm:mt-2 max-sm:gap-0">
+                  {/* Chart Section */}
+                  <div className="flex justify-center items-center relative w-[210px] h-[210px] mx-auto max-sm:mt-6 max-sm:px-5 max-md:py-20 text-center rounded-md aspect-square max-md:px-5 max-md:mt-6">
+                    <Image
+                      loading="lazy"
+                      src="/Chart.png"
+                      alt="Car rental statistics"
+                      height={327}
+                      width={327}
+                      className="object-cover absolute inset-0"
+                    />
+                    <div className="flex relative flex-col items-center w-full text-center">
+                      <div className="text-2xl font-bold tracking-tighter text-[#1A202C]">
+                        72,030
+                      </div>
+                      <div className="mt-1 text-sm font-medium tracking-tight text-[#90A3BF]">
+                        Rental Car
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Stats Section */}
+                  <div className="flex flex-col w-full text-sm font-semibold tracking-tight max-sm:mt-8 max-sm:px-2">
+                    {carStats.map((stat, index) => (
+                      <div
+                        key={index}
+                        className={`flex items-center justify-between ${
+                          index > 0 ? "mt-6" : ""
+                        }`}
+                      >
+                        <CarStats {...stat} />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="mt-1 text-sm font-medium tracking-tight text-[#90A3BF]">
-              Rental Car
-            </div>
-          </div>
-        </div>
-
-        {/* Stats Section */}
-        <div className="flex flex-col w-full text-sm font-semibold tracking-tight max-sm:mt-8 max-sm:px-6">
-          {carStats.map((stat, index) => (
-            <div
-              key={index}
-              className={`flex items-center justify-between ${
-                index > 0 ? "mt-6" : ""
-              }`}
-            >
-              <CarStats {...stat} />
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </div>
-
-
 
             <div className="flex overflow-hidden flex-col justify-center p-6 mt-8 w-full bg-white rounded-xl max-md:px-5 max-md:max-w-full">
-              <div className="flex gap-52 items-start max-md:max-w-full max-sm:w-[327px]">
-                <div className="text-[20px] w-full max-sm:w-full max-sm:text-base leading-[30px] font-[700] tracking-[-0.03em] text-[#1A202C]">
+              <div className="flex md:gap-52 items-start max-md:max-w-full ">
+                <div className="md:text-[20px] w-full max-sm:w-full text-md leading-[30px] font-[700] tracking-[-0.03em] text-[#1A202C]">
                   Recent Transaction
                 </div>
 
@@ -400,7 +416,7 @@ export default function DashboardPage() {
                   </button>
                 </Link>
               </div>
-              <div className="flex flex-col mt-8 w-full max-md:max-w-full">
+              <div className="flex flex-col mt-8 gap-2 w-full max-md:max-w-full">
                 {transactions.map((transaction, index) => (
                   <TransactionItem key={index} {...transaction} />
                 ))}
