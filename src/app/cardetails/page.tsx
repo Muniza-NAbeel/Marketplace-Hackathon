@@ -31,7 +31,6 @@ const reviews: ReviewType[] = [
     avatar: "/review1.png",
     comment:
       "We are very happy with the service from the MORENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.",
-    className: "max-md:flex-row max-md:items-center max-md:gap-4",
   },
   {
     id: "2",
@@ -42,7 +41,6 @@ const reviews: ReviewType[] = [
     avatar: "/review.png",
     comment:
       "We are greatly helped by the services of the MORENT Application. Morent has low prices and also a wide variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.",
-    className: "max-md:flex-row max-md:items-center max-md:gap-4",
   },
 ];
 
