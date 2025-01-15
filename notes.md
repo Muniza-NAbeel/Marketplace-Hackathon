@@ -79,3 +79,10 @@ Answer: Our Car Rental marketplace will stand out because of:
   - Name  
   - Contact info  
   - Car IDs  
+
+  - **Tracking**  
+  - Unique tracking ID  
+  - Tracking Table 
+  - location 
+  - Status 
+
