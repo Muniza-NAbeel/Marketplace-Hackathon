@@ -2,16 +2,11 @@ import { CapacityFilter } from "@/components/Cardetail/CapacityFilter";
 import { CarTypeFilter } from "@/components/Cardetail/CarTypeFilter";
 import {
   CarTypeOption,
-  CarType,
   CapacityOption,
 } from "@/components/Cardetail/types";
-import Image from "next/image";
+import RecommendationCars from "@/components/RecommendationCars";
 import Link from "next/link";
-import { BiAperture } from "react-icons/bi";
-import { BsFillPeopleFill } from "react-icons/bs";
-import { FaGasPump } from "react-icons/fa6";
 import { GoArrowSwitch } from "react-icons/go";
-import { IoMdHeartEmpty } from "react-icons/io";
 
 const carTypeOptions: CarTypeOption[] = [
   { icon: "/tick.png", label: "Sport", count: 10, isSelected: true },
@@ -29,146 +24,7 @@ const capacityOptions: CapacityOption[] = [
   { icon: "/tick.png", label: "8 or More", count: 16 },
 ];
 
-const recentCars: CarType[] = [
-  {
-    id: "1",
-    name: "Koenigsegg",
-    type: "Sport",
-    image: "/koenigsegg.png",
-    isFavorite: true,
-    specs: {
-      gasoline: "90L",
-      steering: "Manual",
-      capacity: "2 People",
-    },
-    price: {
-      current: 99.0,
-    },
-  },
-  {
-    id: "2",
-    name: "Nissan GT - R",
-    type: "Sport",
-    image: "/NissanGT-R.png",
-    isFavorite: false,
-    specs: {
-      gasoline: "90L",
-      steering: "Manual",
-      capacity: "2 People",
-    },
-    price: {
-      current: 80.0,
-      original: 100.0,
-    },
-  },
-  {
-    id: "3",
-    name: "Rolls-Royce",
-    type: "Sport",
-    image: "/Rolls-Royce.png",
-    isFavorite: false,
-    specs: {
-      gasoline: "90L",
-      steering: "Manual",
-      capacity: "2 People",
-    },
-    price: {
-      current: 96.0,
-    },
-  },
-  {
-    id: "4",
-    name: "All New Rush",
-    type: "Sport",
-    image: "/r1.png",
-    isFavorite: false,
-    specs: {
-      gasoline: "90L",
-      steering: "Manual",
-      capacity: "2 People",
-    },
-    price: {
-      current: 72.0,
-      original: 100.0,
-    },
-  },
-  {
-    id: "5",
-    name: "CR - V",
-    type: "Sport",
-    image: "/r2.png",
-    isFavorite: true,
-    specs: {
-      gasoline: "90L",
-      steering: "Manual",
-      capacity: "2 People",
-    },
-    price: {
-      current: 80.0,
-    },
-  },
-  {
-    id: "6",
-    name: "All New Terios",
-    type: "Sport",
-    image: "/r3.png",
-    isFavorite: false,
-    specs: {
-      gasoline: "90L",
-      steering: "Manual",
-      capacity: "2 People",
-    },
-    price: {
-      current: 80.0,
-    },
-  },
-  {
-    id: "7",
-    name: "MG ZX Exclusice",
-    type: "Sport",
-    image: "/r1.png",
-    isFavorite: false,
-    specs: {
-      gasoline: "90L",
-      steering: "Manual",
-      capacity: "2 People",
-    },
-    price: {
-      current: 72.0,
-      original: 100.0,
-    },
-  },
-  {
-    id: "5",
-    name: "New MG ZS",
-    type: "Sport",
-    image: "/r2.png",
-    isFavorite: true,
-    specs: {
-      gasoline: "90L",
-      steering: "Manual",
-      capacity: "2 People",
-    },
-    price: {
-      current: 80.0,
-    },
-  },
-  {
-    id: "9",
-    name: "MG ZX Excite",
-    type: "Sport",
-    image: "/r3.png",
-    isFavorite: false,
-    specs: {
-      gasoline: "90L",
-      steering: "Manual",
-      capacity: "2 People",
-    },
-    price: {
-      current: 80.0,
-    },
-  },
-];
+
 export default function Categories() {
   return (
     <>
@@ -294,93 +150,9 @@ export default function Categories() {
 
             {/* Recommendation Cars */}
             <div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 p-4">
-                {recentCars.map((car) => (
-                  <div
-                    key={car.name}
-                    className="border rounded-lg shadow-lg p-4 flex flex-col bg-white"
-                  >
-                    <div className="flex justify-between items-center mb-1">
-                      <h3 className="text-[#1A202C] font-bold text-[16px]">
-                        {car.name}
-                      </h3>
-                      {["Koenigsegg", "CR - V", "MG ZX Excite"].includes(
-                        car.name
-                      ) ? (
-                        <Image
-                          src="/redheart.png"
-                          alt="Heart"
-                          height={20}
-                          width={20}
-                        />
-                      ) : (
-                        <IoMdHeartEmpty className="text-black w-5 h-5" />
-                      )}
-                    </div>
-
-                    <p className="text-[#90A3BF] font-[700] text-sm mb-4">
-                      {car.type}
-                    </p>
-                    <div className="flex justify-center mt-2 mb-3">
-                      <Image
-                        src={car.image}
-                        alt={car.name}
-                        width={272}
-                        height={200}
-                        className="object-contain"
-                      />
-                    </div>
-                    <div className="flex justify-between items-center w-full text-[#90A3BF] text-sm mb-1 mt-4 font-[500]">
-                      <div className="flex items-center space-x-1">
-                        <FaGasPump />
-                        <span>{car.specs.gasoline}</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <BiAperture />
-                        <span>{car.specs.steering}</span>
-                      </div>
-                      <div className="flex items-center space-x-1">
-                        <BsFillPeopleFill />
-                        <span>{car.specs.capacity}</span>
-                      </div>
-                    </div>
-                    <div className="flex gap-5 justify-between mt-5 w-full">
-                      <div className="flex flex-col font-[700] text-[20px] text-slate-900">
-                        {/* Current price and "per day" */}
-                        <div className="flex items-center">
-                          <span className="text-xl">
-                            ${car.price.current.toFixed(2)}
-                          </span>
-                          <span className="text-base text-slate-400 ml-1">
-                            /day
-                          </span>
-                        </div>
-
-                        {/* Original price */}
-                        {car.price.original && (
-                          <div className="mt-1 text-[#90A3BF] text-sm line-through">
-                            ${car.price.original.toFixed(2)}
-                          </div>
-                        )}
-                      </div>
-
-                      {/* Link With Car Detail Page */}
-
-                      <Link href={"/cardetails"}>
-                        <button className="gap-2 self-start p-[10px] px-3 py-2 mt-1 text-base font-medium tracking-tight text-center text-white bg-[#3563E9] rounded min-h-[10px] w-[130px] whitespace-nowrap hover:bg-[#54A6FF] active:bg-[#3563E9] active:scale-95 transition-all">
-                          Rent Now
-                        </button>
-                      </Link>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              <RecommendationCars showHeading={false} cardsPerRow={3} limit={6}/>
+              
             </div>
-            <section className="button w-full text-center mb-10">
-              <button className="gap-2 self-start p-[10px] py-2 mt-1 text-base font-medium tracking-tight text-center text-white bg-[#3563E9] rounded min-h-[10px] w-[130px] whitespace-nowrap hover:bg-[#54A6FF] active:bg-[#3563E9] active:scale-95 transition-all">
-                Show more car
-              </button>
-            </section>
           </div>
         </div>
       </section>

@@ -1,5 +1,15 @@
-import React from "react";
+"use client";
+
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { client } from "@/sanity/lib/client";
 import Image from "next/image";
+import { Cars } from "../../types/car";
+import RecommendationCars from "@/components/RecommendationCars";
+import Link from "next/link";
+import PopularCars from "@/components/PopularCars";
+import { RiArrowDropDownLine } from "react-icons/ri";
+import { ReviewCard } from "@/components/Cardetail/ReviewCard";
 import { CarTypeFilter } from "@/components/Cardetail/CarTypeFilter";
 import { CapacityFilter } from "@/components/Cardetail/CapacityFilter";
 import {
@@ -7,11 +17,7 @@ import {
   CarTypeOption,
   ReviewType,
 } from "@/components/Cardetail/types";
-import { ReviewCard } from "@/components/Cardetail/ReviewCard";
-import { RiArrowDropDownLine } from "react-icons/ri";
-import { CarCard } from "@/components/Cardetail/CarCard";
-import { CarType } from "../categories/types";
-import Link from "next/link";
+import { urlFor } from "@/sanity/lib/image";
 
 const carTypeOptions: CarTypeOption[] = [
   { icon: "/tick.png", label: "Sport", count: 10, isSelected: true },
@@ -51,104 +57,32 @@ const capacityOptions: CapacityOption[] = [
   { icon: "/tick.png", label: "8 or More", count: 16 },
 ];
 
-const recentCars: CarType[] = [
-  {
-    id: "1",
-    name: "Koenigsegg",
-    type: "Sport",
-    image: "/koenigsegg.png",
-    isFavorite: true,
-    specs: {
-      gasoline: "90L",
-      steering: "Manual",
-      capacity: "2 People",
-    },
-    price: {
-      current: 99.0,
-    },
-  },
-  {
-    id: "2",
-    name: "Nissan GT - R",
-    type: "Sport",
-    image: "/NissanGT-R.png",
-    isFavorite: false,
-    specs: {
-      gasoline: "90L",
-      steering: "Manual",
-      capacity: "2 People",
-    },
-    price: {
-      current: 80.0,
-      original: 100.0,
-    },
-  },
-  {
-    id: "3",
-    name: "Rolls-Royce",
-    type: "Sport",
-    image: "/Rolls-Royce.png",
-    isFavorite: false,
-    specs: {
-      gasoline: "90L",
-      steering: "Manual",
-      capacity: "2 People",
-    },
-    price: {
-      current: 96.0,
-    },
-  },
-];
-const RecomendationCar: CarType[] = [
-  {
-    id: "1",
-    name: "All New Rush",
-    type: "SVG",
-    image: "/r1.png",
-    isFavorite: false,
-    specs: {
-      gasoline: "70L",
-      steering: "Manual",
-      capacity: "6 People",
-    },
-    price: {
-      current: 72.0,
-      original: 80.0,
-    },
-  },
-  {
-    id: "2",
-    name: "CR - V",
-    type: "SVG",
-    image: "/r2.png",
-    isFavorite: true,
-    specs: {
-      gasoline: "80L",
-      steering: "Manual",
-      capacity: "6 People",
-    },
-    price: {
-      current: 80.0,
-    },
-  },
-  {
-    id: "3",
-    name: "All New Terios",
-    type: "SVG",
-    image: "/r3.png",
-    isFavorite: false,
-    specs: {
-      gasoline: "90L",
-      steering: "Manual",
-      capacity: "6 People",
-    },
-    price: {
-      current: 74.0,
-    },
-  },
-];
+const CarDetails = () => {
+  const { id } = useParams();
+  const [car, setCar] = useState<Cars | null>(null);
 
-const page = () => {
+  useEffect(() => {
+    const fetchCarDetails = async () => {
+      if (id) {
+        try {
+          const carData: Cars[] = await client.fetch(`*[_id == "${id}"]`);
+          if (carData.length > 0) {
+            setCar(carData[0]);
+          } else {
+            console.error("Car not found");
+          }
+        } catch (error) {
+          console.error("Error fetching car details:", error);
+        }
+      }
+    };
+
+    fetchCarDetails();
+  }, [id]);
+
+  if (!car) return <div>Loading...</div>;
+
+
   return (
     <section className="overflow-hidden pr-8 bg-[#F6F7F9] max-md:pr-5">
       {/*==========>>>>>>>> Sidebar <<<<<<<<<<====== */}
@@ -189,15 +123,15 @@ const page = () => {
                 }}
               >
                 <h2 className="font-[600] text-[#FFFFFF] text-[32px] leading-[48px] tracking-[-3%] mb-4 max-sm:text-[24px] max-sm:leading-[32px]">
-                  Sports car with the best design and acceleration
+                  {car?.name} with the best design and acceleration
                 </h2>
                 <p className="font-[500] text-[16px] text-[#FFFFFF] leading-[24px] tracking-[-2%] max-sm:text-[14px] max-sm:leading-[20px]">
                   Safety and comfort while driving <br /> futuristic and elegant
-                  sports cars.
+                  cars.
                 </p>
 
                 <Image
-                  src="/herotwo.png"
+                  src={car.image ? urlFor(car.image).url() : "/herotwo.png"}
                   alt="Car"
                   height={300}
                   width={300}
@@ -207,13 +141,15 @@ const page = () => {
 
               {/* Thumbnails directly below the main image */}
               <div className="flex lg:space-x-4 max-sm:space-x-2 max-sm:justify-between mt-3">
-                <Image
-                  src="/View.png"
-                  alt="Thumbnail 1"
-                  width={200}
-                  height={200}
-                  className="w-[160px] h-[108px] rounded-lg max-sm:w-[100px] max-sm:h-[60px]"
-                />
+                {car?.image && (
+                  <Image
+                    src={urlFor(car.image).url()}
+                    alt="Car Image"
+                    width={200}
+                    height={200}
+                    className="w-[160px] h-[108px] rounded-lg max-sm:w-[100px] max-sm:h-[60px]"
+                  />
+                )}
                 <Image
                   src="/View2.png"
                   alt="Thumbnail 2"
@@ -235,7 +171,7 @@ const page = () => {
             <div className="bg-white rounded-[10px] h-auto md:h-[508px] mt-[20px] lg:w-[492px] p-6 flex flex-col justify-between max-sm:w-full max-sm:mt-4">
               <div>
                 <h3 className="text-[32px] font-[700] leading-[48px] tracking-[-3%] text-[#1A202C] max-sm:text-[24px] max-sm:leading-[32px]">
-                  Nissan GT – R
+                  {car?.name} {/* Replace static title with dynamic car name */}
                 </h3>
                 <div className="flex items-center">
                   <span className="text-yellow-400 mt-2 text-2xl">
@@ -263,10 +199,11 @@ const page = () => {
                   </div>
                   <div>
                     <p className="font-[600] text-[20px] max-sm:text-[#1A202C]  leading-[30px] tracking-[-2%] text-[#596780] max-sm:text-[12px]">
-                      Sport
+                      {car?.type} {/* Dynamically display car type */}
                     </p>
                     <p className="font-[600] text-[20px] max-sm:text-[#1A202C]  mt-2 leading-[30px] tracking-[-2%] text-[#596780] max-sm:text-[12px]">
-                      Manual
+                      {car?.transmission}{" "}
+                      {/* Dynamically display steering type */}
                     </p>
                   </div>
                   <div>
@@ -274,15 +211,16 @@ const page = () => {
                       Capacity
                     </p>
                     <p className="text-[#90A3BF] font-[400] text-[20px] mt-2 leading-[30px] tracking-[-2%] max-sm:text-[12px]">
-                      Gasoline
+                      Fuel Type
                     </p>
                   </div>
                   <div>
                     <p className="font-[600] text-[20px] max-sm:text-[#1A202C]  leading-[30px] tracking-[-2%] text-[#596780] max-sm:text-[12px]">
-                      2 Person
+                      {car?.seatingCapacity}{" "}
+                      {/* Dynamically display capacity */}
                     </p>
                     <p className="font-[600] text-[20px] max-sm:text-[#1A202C]  leading-[30px] mt-2 tracking-[-2%] text-[#596780] max-sm:text-[12px]">
-                      70L
+                      {car?.fuelCapacity} {/* Dynamically display fuel type */}
                     </p>
                   </div>
                 </div>
@@ -290,15 +228,25 @@ const page = () => {
               <div className="flex justify-between items-center pt-8 mb-4 max-sm:flex-row max-sm:items-center max-sm:gap-2">
                 <div>
                   <p className="text-xl font-[700] text-[#1A202C] max-sm:text-lg">
-                    $80.00/
-                    <span className="mt-0 text-sm text-[#90A3BF]">days</span>
+                    {car?.pricePerDay}
                   </p>
+
                   <span className="line-through text-[#90A3BF] max-sm:text-sm">
-                    $100.00
+                    {car?.originalPrice} {/* Display original price */}
                   </span>
                 </div>
-
-                <Link href={"/payment"} className="max-sm:self-end">
+                <Link
+                  href={{
+                    pathname: "/payment",
+                    query: {
+                      carId: car?._id,
+                      carName: car?.name,
+                      carImage: urlFor(car?.image).url(),
+                      price: car?.pricePerDay,
+                    },
+                  }}
+                  className="max-sm:self-end"
+                >
                   <button className="gap-2 p-[10px] text-base font-medium tracking-tight text-center text-white bg-[#3563E9] rounded min-h-[10px] w-[130px] whitespace-nowrap hover:bg-[#54A6FF] active:bg-[#3563E9] active:scale-95 transition-all">
                     Rent Now
                   </button>
@@ -349,14 +297,12 @@ const page = () => {
             </div>
 
             {/* Cars Grid Section */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
-              {recentCars.map((car) => (
-                <CarCard key={car.id} car={car} />
-              ))}
-            </div>
+
+            <PopularCars showHeading={false} cardsPerRow={3} limit={3} />
           </div>
 
           {/* Recommendation Cars */}
+
           <div className="flex flex-col p-6 mb-14 max-md:max-w-full">
             <div className="flex gap-10 items-center justify-between flex-wrap text-base font-semibold tracking-tight text-center max-md:max-w-full">
               <div className="text-md w-auto text-[#90A3BF]">
@@ -369,10 +315,12 @@ const page = () => {
                 </h2>
               </Link>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-start mt-4">
-              {RecomendationCar.map((car) => (
-                <CarCard key={car.id} car={car} />
-              ))}
+            <div className="mt-0">
+              <RecommendationCars
+                showHeading={false}
+                cardsPerRow={3}
+                limit={3}
+              />
             </div>
           </div>
         </div>
@@ -381,4 +329,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default CarDetails;
