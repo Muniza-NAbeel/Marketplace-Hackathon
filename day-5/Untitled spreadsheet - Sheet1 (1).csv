@@ -1,0 +1,8 @@
+Test Case ID,Test Case Description,Test Steps,Expected Result,Actual Result,Status,Severity Level,Assigned To,Remarks,
+1,TC001,Car Listing,Open Server,Correctly Displayed,Passsed,Passed,Low,-,No issues found
+2,TC002,Car Detail Page,Click On the Car,Result not as Expected,Failed,Failed,High,-,no dynamic in the payment page
+3,TC003,Add to Notification icon,Add to notification & color change of the icon,Correctly Displayed,Passed,Passed,low,-,Works as expected
+4,TC004,Performence Testing,Show testing report more than 80%,Result not as Expected,Passed,Passed,medium,-,Test successful
+5,TC005,Cross Browser & Device Testing,Display Output Properly,Renders Correctly On different Browser,Passed,Passed,low,,Handled gracefully
+6,TC006,Security Testing,Secured,Not sure,Failed,Failed,high,,Error Facing to make secure connection
+7,TC007,Responsivness,Check on different Devices,As Expected,Passed,passed,low,,no issue found
