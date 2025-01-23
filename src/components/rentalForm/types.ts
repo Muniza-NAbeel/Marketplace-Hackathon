@@ -27,7 +27,7 @@ export interface InputFieldProps {
     carImage: string;
     rating: number;
     reviews: number;
-    subtotal: number;
+    subtotal: string;
     tax: number;
-    total: number;
+    total: string;
   }

@@ -7,7 +7,6 @@ import Image from "next/image";
 import { Cars } from "../../types/car";
 import RecommendationCars from "@/components/RecommendationCars";
 import Link from "next/link";
-import PopularCars from "@/components/PopularCars";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { ReviewCard } from "@/components/Cardetail/ReviewCard";
 import { CarTypeFilter } from "@/components/Cardetail/CarTypeFilter";
@@ -81,7 +80,6 @@ const CarDetails = () => {
   }, [id]);
 
   if (!car) return <div>Loading...</div>;
-
 
   return (
     <section className="overflow-hidden pr-8 bg-[#F6F7F9] max-md:pr-5">
@@ -237,9 +235,8 @@ const CarDetails = () => {
                 </div>
                 <Link
                   href={{
-                    pathname: "/payment",
+                    pathname: `/payments/${car?._id}`, // Dynamic route with car ID
                     query: {
-                      carId: car?._id,
                       carName: car?.name,
                       carImage: urlFor(car?.image).url(),
                       price: car?.pricePerDay,
@@ -280,25 +277,6 @@ const CarDetails = () => {
                 <RiArrowDropDownLine className="text-4xl object-contain shrink-0 self-stretch my-auto w-8 aspect-square max-md:text-3xl" />
               </button>
             </Link>
-          </div>
-          {/* Recent Cars Section */}
-          <div className="flex flex-col mt-8 p-8 max-md:max-w-full">
-            {/* Header Section */}
-            <div className="flex justify-between items-center flex-wrap gap-4 text-base font-semibold tracking-tight max-md:text-sm">
-              <div className="text-[#90A3BF] rounded text-md w-auto">
-                Recent Cars
-              </div>
-
-              <Link href={"/categories"} className="hover:cursor-pointer">
-                <h2 className="text-[#3563E9] text-md font-semibold leading-[20.16px] hover:underline underline-offset-1 hover:text-[#3895ff] active:text-secondary active:scale-95 transition-all">
-                  View All
-                </h2>
-              </Link>
-            </div>
-
-            {/* Cars Grid Section */}
-
-            <PopularCars showHeading={false} cardsPerRow={3} limit={3} />
           </div>
 
           {/* Recommendation Cars */}

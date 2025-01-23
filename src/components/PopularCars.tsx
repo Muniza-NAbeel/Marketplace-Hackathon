@@ -11,39 +11,31 @@ import { popular } from "@/sanity/lib/queries";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 
-interface PopularCarsProps {
-  showHeading?: boolean;
-  cardsPerRow?: number;
-  limit?: number;
-}
-
-const PopularCars: React.FC<PopularCarsProps> = ({ showHeading = true, cardsPerRow = 4, limit }) => {
+const PopularCars: React.FC = () => {
   const [cars, setCars] = useState<Cars[]>([]);
 
   useEffect(() => {
     async function fetchCars() {
       const fetchedCars: Cars[] = await client.fetch(popular);
-      setCars(limit ? fetchedCars.slice(0, limit) : fetchedCars); 
+      setCars(fetchedCars); 
     }
     fetchCars();
-  }, [limit]);
+  }, []);
 
   return (
     <div className="max-w-[1440px] h-auto gap-[20px] p-4">
-      {showHeading && (
-        <div className="flex justify-between items-center max-w-[1312px] h-[64px] rounded-[4px] px-6 gap-[32px]">
-          <h2 className="text-[#90A3BF] text-md md:text-xl font-bold mb-6">
-            Popular Cars
+      <div className="flex justify-between items-center max-w-[1312px] h-[64px] rounded-[4px] px-6 gap-[32px]">
+        <h2 className="text-[#90A3BF] text-md md:text-xl font-bold mb-6">
+          Popular Cars
+        </h2>
+        <Link href={"/categories"}>
+          <h2 className="text-[#3563E9] text-md md:text-xl font-semibold mb-6 text-center text-[16px] leading-[20.16px] hover:underline underline-offset-1 hover:text-[#3895ff] active:text-secondary active:scale-95 transition-all hover:cursor-pointer">
+            View All
           </h2>
-          <Link href={"/categories"}>
-            <h2 className="text-[#3563E9] text-md md:text-xl font-semibold mb-6 text-center text-[16px] leading-[20.16px] hover:underline underline-offset-1 hover:text-[#3895ff] active:text-secondary active:scale-95 transition-all hover:cursor-pointer">
-              View All
-            </h2>
-          </Link>
-        </div>
-      )}
+        </Link>
+      </div>
       
-      <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-${cardsPerRow} gap-6 p-4`}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
         {cars.map((car) => (
           <div
             key={car._id}
@@ -112,3 +104,4 @@ const PopularCars: React.FC<PopularCarsProps> = ({ showHeading = true, cardsPerR
 };
 
 export default PopularCars;
+
