@@ -10,7 +10,6 @@ import Link from "next/link";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { ReviewCard } from "@/components/Cardetail/ReviewCard";
 import { urlFor } from "@/sanity/lib/image";
-import SideBar from "@/components/SideBar";
 import { ReviewType } from "@/components/Cardetail/types";
 import ClipLoader from "react-spinners/ClipLoader";
 
