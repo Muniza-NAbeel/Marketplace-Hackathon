@@ -1,6 +1,8 @@
 import Image from "next/image";
 import { GoArrowSwitch } from "react-icons/go";
 import Link from "next/link";
+import Pickup from "./Pickup";
+import Dropoff from "./Dropoff";
 
 export default function HeroSection() {
   return (
@@ -56,7 +58,7 @@ export default function HeroSection() {
             facilities.
           </p>
 
-          <Link href={"/payment"}>
+          <Link href={"/categories"}>
             <button className="mt-4 bg-[#54A6FF] text-white w-[120px] h-[44px] rounded-[4px] px-[20px] gap-[8px] hover:bg-[#528aca] active:bg-[#3563E9] active-scale-95 transition-all">
               Rental Car
             </button>
@@ -72,46 +74,16 @@ export default function HeroSection() {
         </div>
       </div>
 
+
+    {/* div for pickup and drop off */}
+  
+
+
       <div className="flex flex-col md:flex-row items-center justify-between md:gap-32 max-sm:gap-5 mt-[32px] relative ">
         {/* Main Container */}
-        <div className="flex flex-col lg:flex-row justify-center items-center gap-0 lg:gap-8 p-4">
+        <div className="flex flex-col lg:flex-row justify-center items-center gap-0 lg:gap-8 p-4 ">
           {/* Pickup Section */}
-          <div className="flex-1 bg-white p-6 rounded-lg shadow-md h-[132px] w-[552px] max-sm:w-[190%]">
-            <div className="flex items-center space-x-2">
-              <div className="flex justify-center items-center px-1 w-4 h-4 bg-blue-400 bg-opacity-30 rounded-[70px] relative">
-                <div className="absolute top-1/2 w-4 h-4 bg-blue rounded-full border-4 border-secondary transform -translate-y-1/2"></div>
-              </div>
-              <span className="text-base font-bold tracking-tight text-[#1A202C]">
-                Pick-Up
-              </span>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div>
-                <label className="block text-sm mt-2 p-1 font-medium">
-                  Locations
-                </label>
-                <select className="w-full border rounded-md text-xs pt-1 pb-1 text-[#90A3BF]">
-                  <option className="text-xs">Select your city</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm mt-2 p-1 font-medium">
-                  Date
-                </label>
-                <select className="w-full border rounded-md text-xs pt-1 pb-1 text-[#90A3BF]">
-                  <option className="text-xs">Select your date</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm mt-2 p-1 font-medium">
-                  Time
-                </label>
-                <select className="w-full border rounded-md text-xs pt-1 pb-1 text-[#90A3BF]">
-                  <option className="text-xs">Select your time</option>
-                </select>
-              </div>
-            </div>
-          </div>
+          <Pickup/>
 
           {/* Arrow Icon Section */}
           <div className="flex items-center justify-center lg:relative lg:top-0 lg:left-0">
@@ -123,44 +95,11 @@ export default function HeroSection() {
           </div>
 
           {/* Drop-Off Section */}
-          <div className="flex-1 bg-white p-6 rounded-lg shadow-md h-[132px] w-[552px] max-sm:w-[190%]">
-            <div className="flex items-center space-x-2">
-              <div className="flex justify-center items-center px-1 w-4 h-4 bg-blue-400 bg-opacity-30 rounded-[70px] relative">
-                <div className="absolute top-1/2 w-4 h-4 bg-blue rounded-full border-4 border-secondary transform -translate-y-1/2"></div>
-              </div>
-              <span className="text-base font-bold tracking-tight text-[#1A202C]">
-                Drop-Off
-              </span>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div>
-                <label className="block text-sm mt-2 p-1 font-medium">
-                  Locations
-                </label>
-                <select className="w-full border rounded-md text-xs pt-1 pb-1 text-[#90A3BF]">
-                  <option className="text-xs">Select your city</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm mt-2 p-1 font-medium">
-                  Date
-                </label>
-                <select className="w-full border rounded-md text-xs pt-1 pb-1 text-[#90A3BF]">
-                  <option className="text-xs">Select your date</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm mt-2 p-1 font-medium">
-                  Time
-                </label>
-                <select className="w-full border rounded-md text-xs pt-1 pb-1 text-[#90A3BF]">
-                  <option className="text-xs">Select your time</option>
-                </select>
-              </div>
-            </div>
-          </div>
+          <Dropoff />
         </div>
       </div>
+
+      
     </div>
   );
 }

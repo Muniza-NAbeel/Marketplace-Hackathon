@@ -25,16 +25,4 @@ export interface CarType {
     comment: string;
   }
   
-  export interface CarTypeOption {
-    icon: string;
-    label: string;
-    count: number;
-    isSelected?: boolean;
-  }
   
-  export interface CapacityOption {
-    icon: string;
-    label: string;
-    count: number;
-    isSelected?: boolean;
-  }

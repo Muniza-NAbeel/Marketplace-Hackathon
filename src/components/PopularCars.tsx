@@ -16,7 +16,7 @@ const PopularCars: React.FC = () => {
 
   useEffect(() => {
     async function fetchCars() {
-      const fetchedCars: Cars[] = await client.fetch(popular);
+      const fetchedCars: Cars[] = await client.fetch(popular, {Cache: "no-cache"});
       setCars(fetchedCars); 
     }
     fetchCars();

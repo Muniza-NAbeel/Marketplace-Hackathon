@@ -30,7 +30,7 @@ export default function RecommendationCars({
   // Fetch cars data from the backend
   useEffect(() => {
     async function fetchCars() {
-      const fetchedCars: Cars[] = await client.fetch(recommendedCars);
+      const fetchedCars: Cars[] = await client.fetch(recommendedCars, {Cache:"no-Cache"});
       setCars(fetchedCars); 
     }
     fetchCars();
@@ -56,7 +56,7 @@ export default function RecommendationCars({
 
       {/* Cars Grid */}
       <div
-        className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-${cardsPerRow} gap-6 p-4`}
+        className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-${cardsPerRow} gap-6 p-4`}
       >
         {carsToShow.map((car) => (
           <div

@@ -4,6 +4,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Navbar from '@/components/Navbar';
 import FooterHandler from "@/components/FooterHandler";
+import ReduxProvider from "@/redux/Provider";
 
 
 // Local Fonts
@@ -40,9 +41,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${plusJakartaSans.variable} antialiased`}
       >
+       <ReduxProvider>
         <Navbar />
         {children}
         <FooterHandler />
+        </ReduxProvider>
+
       </body>
     </html>
   );

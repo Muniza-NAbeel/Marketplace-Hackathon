@@ -10,36 +10,54 @@ import { useEffect, useState } from "react";
 import { Cars } from "@/app/types/car";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
-
+import { useDispatch } from "react-redux";
+import { add } from "@/redux/CarSlice";
 
 const RentalForm = () => {
-    const { id } = useParams();
-    const [car, setCar] = useState<Cars | null>(null);
-  
-    useEffect(() => {
-      const fetchCarDetails = async () => {
-        if (id) {
-          try {
-            const carData: Cars[] = await client.fetch(`*[_id == "${id}"]`);
-            if (carData.length > 0) {
-              setCar(carData[0]);
-            } else {
-              console.error("Car not found");
-            }
-          } catch (error) {
-            console.error("Error fetching car details:", error);
+  const { id } = useParams();
+  const [car, setCar] = useState<Cars | null>(null);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchCarDetails = async () => {
+      if (id) {
+        try {
+          const carData: Cars[] = await client.fetch(`*[_id == "${id}"]`);
+          if (carData.length > 0) {
+            setCar(carData[0]);
+          } else {
+            console.error("Car not found");
           }
+        } catch (error) {
+          console.error("Error fetching car details:", error);
         }
-      };
-  
-      fetchCarDetails();
-    }, [id]);
-  
-    if (!car) return <div>Loading...</div>;  return (
+      }
+    };
+
+    fetchCarDetails();
+  }, [id]);
+
+  if (!car) return <div>Loading...</div>;
+
+  const handleAddToCart = () => {
+    if (car) {
+      dispatch(
+        add({
+          id: car._id,
+          name: car.name,
+          type: car.type,
+          pricePerDay: car.pricePerDay,
+          image: urlFor(car.image).url(),
+        })
+      );
+    }
+  };
+
+  return (
     <div className="overflow-hidden p-6 max-md:px-5">
       <div className="flex gap-0 max-md:flex-col">
-        {/* Billing Section */}
-        <div className="flex flex-col w-[65%] max-md:ml-0 max-md:w-full max-md:order-2">
+         {/* Billing Section */}
+         <div className="flex flex-col w-[65%] max-md:ml-0 max-md:w-full max-md:order-2">
           <form className="flex flex-col grow max-md:mt-10 rounded-[10px] max-md:max-w-full">
             {/* Billing Info Section */}
             <div className="flex overflow-hidden flex-col p-6 w-full bg-white rounded-[10px] max-w-[852px]">
@@ -265,11 +283,11 @@ const RentalForm = () => {
 
               {/* Rent Now Button */}
 
-              <Link href={"/dashboard"}>
-                <button className="self-start mt-6 px-6 py-3 text-white text-base font-medium tracking-tight bg-[#3563E9] rounded-lg w-[130px] hover:bg-[#54A6FF] active:bg-[#3563E9] active:scale-95 transition-all">
+              <Link href= {`/notification`}>
+              <button onClick={handleAddToCart} className="self-start mt-6 px-6 py-3 text-white text-base font-medium tracking-tight bg-[#3563E9] rounded-lg w-[130px] hover:bg-[#54A6FF] active:bg-[#3563E9] active:scale-95 transition-all">
                   Rent Now
                 </button>
-              </Link>
+                </Link>
 
               {/* Data Security Section */}
               <div className="flex items-start gap-4 mt-8 w-full">
@@ -297,38 +315,38 @@ const RentalForm = () => {
           </form>
         </div>
 
-        {/* Rental Summary Section */}
-        <div className="flex flex-col ml-5 w-[34%] max-md:ml-0 max-md:w-full max-md:order-1">
- <div className="flex overflow-hidden flex-col p-6 mx-auto w-full bg-white rounded-xl">
-      <div className="flex flex-col sm:max-w-full">
-        <h2 className="md:text-xl text-lg font-bold tracking-tight text-gray-900">
-          Rental Summary
-        </h2>
-        <p className="mt-1 text-sm font-medium tracking-tight leading-5 text-slate-400">
-          Prices may change depending on the length of the rental and the price
-          of your rental car.
-        </p>
-      </div>
 
-      <div className="flex gap-4 self-start mt-8">
-        <Image
-          loading="lazy"
-          src={car.image ? urlFor(car.image).url() : "/images/tick2.png"}
-          alt={car?.name}
-          height={108}
-          width={132}
-          className="object-contain shrink-0 max-w-full aspect-[1.22] w-[132px]"
-        />
-        <div className="flex overflow-hidden flex-col my-auto">
-          <h3 className="md:text-2xl text-xl font-bold tracking-tighter text-gray-900">
-            {car?.name}
-          </h3>
-          <p className="font-sm text-[14px] max-sm:text-[#1A202C]  text-[#596780] max-sm:text-[12px]">
-                      {car?.type} {/* Dynamically display car type */}
-                    </p>
-                    
-          <div className="flex flex-wrap overflow-hidden gap-4 items-center min-h-[24px]">
-          <div className="flex items-center">
+      {/* Rental Summary Section */}
+      <div className="flex flex-col ml-5 w-[34%] max-md:ml-0 max-md:w-full max-md:order-1">
+        <div className="flex overflow-hidden flex-col p-6 mx-auto w-full bg-white rounded-xl">
+          <div className="flex flex-col sm:max-w-full">
+            <h2 className="md:text-xl text-lg font-bold tracking-tight text-gray-900">
+              Rental Summary
+            </h2>
+            <p className="mt-1 text-sm font-medium tracking-tight leading-5 text-slate-400">
+              Prices may change depending on the length of the rental and the price
+              of your rental car.
+            </p>
+          </div>
+
+          <div className="flex gap-4 self-start mt-8">
+            <Image
+              loading="lazy"
+              src={car.image ? urlFor(car.image).url() : "/images/tick2.png"}
+              alt={car?.name}
+              height={108}
+              width={132}
+              className="object-contain shrink-0 max-w-full aspect-[1.22] w-[132px]"
+            />
+            <div className="flex overflow-hidden flex-col my-auto">
+              <h3 className="md:text-2xl text-xl font-bold tracking-tighter text-gray-900">
+                {car?.name}
+              </h3>
+              <p className="font-sm text-[14px] max-sm:text-[#1A202C] text-[#596780] max-sm:text-[12px]">
+                {car?.type}
+              </p>
+              <div className="flex flex-wrap overflow-hidden gap-4 items-center min-h-[24px]">
+                <div className="flex items-center">
                   <span className="text-yellow-400 text-xl">
                     &#9733;&#9733;&#9733;&#9733;
                   </span>
@@ -337,52 +355,46 @@ const RentalForm = () => {
                     440+ Reviewer
                   </span>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Pricing & Summary */}
+          <hr className="shrink-0 mt-8 h-px border border-solid border-text-[rgba(195,212,233,0.4)]" />
+          <div className="flex gap-36 items-start mt-8 text-base tracking-tight whitespace-nowrap">
+            <div className="font-medium pr-4 text-slate-400 w-[116px]">Subtotal</div>
+            <div className="font-semibold text-right pr-0 text-gray-900 w-[116px]">
+              {car?.pricePerDay}
+            </div>
+          </div>
+
+          {/* Apply Promo */}
+          <div className="flex gap-12 justify-between px-4 py-3 mt-8 rounded-xl bg-neutral-100">
+            <div className="md:text-sm text-xs font-medium tracking-tight text-slate-400">
+              Apply promo code
+            </div>
+            <button className="md:text-base text-xs font-semibold tracking-tight text-right text-[#1A202C] hover:underline hover:underline-blue hover:text-blue ">
+              Apply now
+            </button>
+          </div>
+
+          {/* Total Price */}
+          <div className="flex max-md:gap-3 items-start mt-8">
+            <div className="flex flex-col min-w-[240px] w-[284px]">
+              <h4 className="text-lg font-[700px] tracking-tight text-[#1A202C]">
+                Total Rental Price
+              </h4>
+              <p className="mt-1 text-sm font-medium tracking-tight text-slate-400">
+                Overall price and includes rental discount
+              </p>
+            </div>
+            <div className="w-32 md:text-xl text-sm font-[700px] text-right text-gray-900">
+              {car?.pricePerDay}
+            </div>
           </div>
         </div>
       </div>
-
-      <hr className="shrink-0 mt-8 h-px border border-solid border-text-[rgba(195,212,233,0.4)]" />
-
-      <div className="flex gap-36 items-start mt-8 text-base tracking-tight whitespace-nowrap">
-        <div className="font-medium pr-4 text-slate-400 w-[116px]">Subtotal</div>
-        <div className="font-semibold text-right pr-0 text-gray-900 w-[116px]">
-          {car?.pricePerDay}
-        </div>
-      </div>
-
-      <div className="flex gap-36 items-start mt-6 text-base tracking-tight whitespace-nowrap">
-        <div className="font-medium text-slate-400 w-[116px]">Tax</div>
-        <div className="font-semibold text-right text-gray-900 w-[116px]">
-          ${0}
-        </div>
-      </div>
-
-      <div className="flex gap-12 justify-between px-4 py-3 mt-8 rounded-xl bg-neutral-100">
-        <div className="md:text-sm text-xs font-medium tracking-tight text-slate-400">
-          Apply promo code
-        </div>
-        <button className="md:text-base text-xs font-semibold tracking-tight text-right text-[#1A202C] hover:underline hover:underline-blue hover:text-blue ">
-          Apply now
-        </button>
-      </div>
-
-      <div className="flex max-md:gap-3 items-start mt-8">
-        <div className="flex flex-col min-w-[240px] w-[284px]">
-          <h4 className="text-lg  font-[700px] tracking-tight text-[#1A202C]">
-            Total Rental Price
-          </h4>
-          <p className="mt-1 text-sm font-medium tracking-tight text-slate-400">
-            Overall price and includes rental discount
-          </p>
-        </div>
-        <div className="w-32 md:text-xl text-sm font-[700px] text-right text-gray-900">
-          {car.pricePerDay}
-        </div>
-      </div>
     </div>
-
-        </div>
-      </div>
     </div>
   );
 };

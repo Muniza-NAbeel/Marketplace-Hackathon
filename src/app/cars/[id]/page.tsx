@@ -9,23 +9,11 @@ import RecommendationCars from "@/components/RecommendationCars";
 import Link from "next/link";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { ReviewCard } from "@/components/Cardetail/ReviewCard";
-import { CarTypeFilter } from "@/components/Cardetail/CarTypeFilter";
-import { CapacityFilter } from "@/components/Cardetail/CapacityFilter";
-import {
-  CapacityOption,
-  CarTypeOption,
-  ReviewType,
-} from "@/components/Cardetail/types";
 import { urlFor } from "@/sanity/lib/image";
+import SideBar from "@/components/SideBar";
+import { ReviewType } from "@/components/Cardetail/types";
 
-const carTypeOptions: CarTypeOption[] = [
-  { icon: "/tick.png", label: "Sport", count: 10, isSelected: true },
-  { icon: "/tick.png", label: "SUV", count: 12 },
-  { icon: "/rectangle.png", label: "MPV", count: 16 },
-  { icon: "/rectangle.png", label: "Sedan", count: 20 },
-  { icon: "/rectangle.png", label: "Coupe", count: 14 },
-  { icon: "/rectangle.png", label: "Hatchback", count: 14 },
-];
+
 const reviews: ReviewType[] = [
   {
     id: "1",
@@ -49,12 +37,6 @@ const reviews: ReviewType[] = [
   },
 ];
 
-const capacityOptions: CapacityOption[] = [
-  { icon: "/tick.png", label: "2 Person", count: 10 },
-  { icon: "/rectangle.png", label: "4 Person", count: 14, isSelected: true },
-  { icon: "/rectangle.png", label: "6 Person", count: 12 },
-  { icon: "/tick.png", label: "8 or More", count: 16 },
-];
 
 const CarDetails = () => {
   const { id } = useParams();
@@ -86,26 +68,9 @@ const CarDetails = () => {
       {/*==========>>>>>>>> Sidebar <<<<<<<<<<====== */}
       <div className="grid grid-cols-4 gap-5 max-md:flex max-md:flex-col h">
         <div className="col-span-1 ">
-          <div className="hidden md:flex flex-col overflow-hidden items-start px-8 pt-8 bg-white border-r border-solid border-r-gray-100 h-[2000px] max-md:px-5 max-md:pb-24 max-md:mt-8">
-            <CarTypeFilter options={carTypeOptions} />
-            <CapacityFilter options={capacityOptions} />
+        <div className="hidden md:flex flex-col overflow-hidden items-start px-8 pt-8 bg-white border-r border-solid border-r-gray-100 h-[1500px] max-md:px-5 max-md:pb-24 max-md:mt-8">
 
-            <div className="flex flex-col self-stretch mt-14 max-md:mt-10">
-              <div className="text-xs font-medium tracking-tight text-slate-400">
-                P R I C E
-              </div>
-              <div className="flex flex-col mt-7 w-full max-w-[296px]">
-                <div className="flex items-center pr-14 w-full bg-secondary rounded-lg">
-                  <div className="flex-grow rounded-xl bg-blue h-3 relative">
-                    <div className="absolute top-1/2 right-[-1.5rem] w-6 h-6 bg-blue rounded-full border-4 border-white transform -translate-y-1/2"></div>
-                  </div>
-                </div>
-
-                <div className="mt-3 text-xl font-semibold text-[#596780]">
-                  Max. $100.00
-                </div>
-              </div>
-            </div>
+          <SideBar />
           </div>
         </div>
         <div className="col-span-3 flex flex-col gap-8">
@@ -169,7 +134,7 @@ const CarDetails = () => {
             <div className="bg-white rounded-[10px] h-auto md:h-[508px] mt-[20px] lg:w-[492px] p-6 flex flex-col justify-between max-sm:w-full max-sm:mt-4">
               <div>
                 <h3 className="text-[32px] font-[700] leading-[48px] tracking-[-3%] text-[#1A202C] max-sm:text-[24px] max-sm:leading-[32px]">
-                  {car?.name} {/* Replace static title with dynamic car name */}
+                  {car?.name} 
                 </h3>
                 <div className="flex items-center">
                   <span className="text-yellow-400 mt-2 text-2xl">
@@ -197,11 +162,11 @@ const CarDetails = () => {
                   </div>
                   <div>
                     <p className="font-[600] text-[20px] max-sm:text-[#1A202C]  leading-[30px] tracking-[-2%] text-[#596780] max-sm:text-[12px]">
-                      {car?.type} {/* Dynamically display car type */}
+                      {car?.type} 
                     </p>
                     <p className="font-[600] text-[20px] max-sm:text-[#1A202C]  mt-2 leading-[30px] tracking-[-2%] text-[#596780] max-sm:text-[12px]">
                       {car?.transmission}{" "}
-                      {/* Dynamically display steering type */}
+                    
                     </p>
                   </div>
                   <div>
@@ -235,7 +200,7 @@ const CarDetails = () => {
                 </div>
                 <Link
                   href={{
-                    pathname: `/payments/${car?._id}`, // Dynamic route with car ID
+                    pathname: `/payments/${car?._id}`,
                     query: {
                       carName: car?.name,
                       carImage: urlFor(car?.image).url(),
@@ -299,6 +264,7 @@ const CarDetails = () => {
                 cardsPerRow={3}
                 limit={3}
               />
+              
             </div>
           </div>
         </div>
