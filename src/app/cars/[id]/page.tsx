@@ -12,6 +12,8 @@ import { ReviewCard } from "@/components/Cardetail/ReviewCard";
 import { urlFor } from "@/sanity/lib/image";
 import SideBar from "@/components/SideBar";
 import { ReviewType } from "@/components/Cardetail/types";
+import ClipLoader from "react-spinners/ClipLoader";
+
 
 
 const reviews: ReviewType[] = [
@@ -61,49 +63,40 @@ const CarDetails = () => {
     fetchCarDetails();
   }, [id]);
 
-  if (!car) return <div>Loading...</div>;
 
+  if (!car) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <ClipLoader color="#3563E9" size={50} />
+      </div>
+    );
+  }
   return (
-    <section className="overflow-hidden pr-8 bg-[#F6F7F9] max-md:pr-5">
+    <section className="overflow-hidden pl-4 lg:pr-8 bg-[#F6F7F9] max-md:pr-5">
       {/*==========>>>>>>>> Sidebar <<<<<<<<<<====== */}
-      <div className="grid grid-cols-4 gap-5 max-md:flex max-md:flex-col h">
-        <div className="col-span-1 ">
+      <div className="grid grid-cols-3 gap-5 max-md:flex max-md:flex-col h">
+        {/* <div className="col-span-1 ">
         <div className="hidden md:flex flex-col overflow-hidden items-start px-8 pt-8 bg-white border-r border-solid border-r-gray-100 h-[1500px] max-md:px-5 max-md:pb-24 max-md:mt-8">
 
           <SideBar />
           </div>
-        </div>
-        <div className="col-span-3 flex flex-col gap-8">
-          <div className="flex flex-wrap lg:flex-nowrap gap-8 rounded-lg overflow-hidden">
+        </div> */}
+        <div className="col-span-3 flex flex-col ml:3 lg:ml-14 lg:gap-8">
+          <div className="flex flex-wrap lg:flex-nowrap gap-4 lg:gap-8 bg-white rounded-lg overflow-hidden">
             {/* Left Section */}
-            <div className="w-[327px] h-[232px] top-[20px] lg:w-1/2 bg-blue-100 relative max-sm:w-full max-sm:h-auto">
-              <div
-                className="bg-blue-200 p-6 rounded-lg shadow-md w-[492px] h-[360px] max-sm:w-full max-sm:h-auto"
-                style={{
-                  backgroundImage: 'url("/br.jpg")',
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                }}
-              >
-                <h2 className="font-[600] text-[#FFFFFF] text-[32px] leading-[48px] tracking-[-3%] mb-4 max-sm:text-[24px] max-sm:leading-[32px]">
-                  {car?.name} with the best design and acceleration
-                </h2>
-                <p className="font-[500] text-[16px] text-[#FFFFFF] leading-[24px] tracking-[-2%] max-sm:text-[14px] max-sm:leading-[20px]">
-                  Safety and comfort while driving <br /> futuristic and elegant
-                  cars.
-                </p>
+            <div className="w-[327px] h-[232px]  top-[20px] lg:w-1/2 bg-blue-100 relative max-sm:w-full max-sm:h-auto">
 
                 <Image
                   src={car.image ? urlFor(car.image).url() : "/herotwo.png"}
                   alt="Car"
-                  height={300}
-                  width={300}
-                  className="object-contain mx-auto mt-6 w-[380px] h-[120px] max-sm:w-[280px] max-sm:h-[100px]"
+                  height={900}
+                  width={900}
+                  className="object-contain mx-auto mt-6 w-[380px] h-[220px] max-sm:w-[280px] max-sm:h-[100px]"
                 />
-              </div>
+              
 
               {/* Thumbnails directly below the main image */}
-              <div className="flex lg:space-x-4 max-sm:space-x-2 max-sm:justify-between mt-3">
+              <div className="flex lg:ml-10 lg:space-x-4 max-sm:space-x-2 max-sm:justify-between mt-9">
                 {car?.image && (
                   <Image
                     src={urlFor(car.image).url()}
@@ -188,7 +181,7 @@ const CarDetails = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex justify-between items-center pt-8 mb-4 max-sm:flex-row max-sm:items-center max-sm:gap-2">
+              <div className="flex justify-between items-center pt-2 mb-4 max-sm:flex-row max-sm:items-center max-sm:gap-2">
                 <div>
                   <p className="text-xl font-[700] text-[#1A202C] max-sm:text-lg">
                     {car?.pricePerDay}
@@ -246,7 +239,7 @@ const CarDetails = () => {
 
           {/* Recommendation Cars */}
 
-          <div className="flex flex-col p-6 mb-14 max-md:max-w-full">
+          <div className="flex flex-col p-2 mt-8 lg:mt-2 lg:p-6 lg:mb-20 max-md:max-w-full">
             <div className="flex gap-10 items-center justify-between flex-wrap text-base font-semibold tracking-tight text-center max-md:max-w-full">
               <div className="text-md w-auto text-[#90A3BF]">
                 Recomendation Car
@@ -261,8 +254,8 @@ const CarDetails = () => {
             <div className="mt-0">
               <RecommendationCars
                 showHeading={false}
-                cardsPerRow={3}
-                limit={3}
+                cardsPerRow={4}
+                limit={4}
               />
               
             </div>

@@ -10,6 +10,7 @@ import { Cars } from "../app/types/car";
 import { client } from "@/sanity/lib/client";
 import { recommendedCars } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
+import ClipLoader from "react-spinners/ClipLoader";
 
 interface RecommendationCarsProps {
   showHeading?: boolean;
@@ -43,8 +44,16 @@ export default function RecommendationCars({
     setShowMore(!showMore);
   };
 
+  if (!cars) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <ClipLoader color="#3563E9" size={50} />
+      </div>
+    );
+  }
+
   return (
-    <div className="max-w-[1440px] h-auto gap-[20px] p-4">
+    <div className="max-w-[1440px] h-auto p-2">
       {/* Heading Section */}
       {showHeading && (
         <div className="flex justify-between items-center max-w-[1312px] h-[64px] rounded-[4px] px-6 gap-[32px]">
@@ -56,12 +65,12 @@ export default function RecommendationCars({
 
       {/* Cars Grid */}
       <div
-        className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-${cardsPerRow} gap-6 p-4`}
+        className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-${cardsPerRow} gap-6 p-2`}
       >
         {carsToShow.map((car) => (
           <div
             key={car._id}
-            className="border rounded-lg shadow-lg p-4 flex flex-col bg-white h-full"
+            className="border rounded-lg shadow-lg p-4 flex flex-col bg-white h-full duration-100 hover:scale-95"
           >
             {/* Car Title and Heart Icon */}
             <Link href={`/cars/${car._id}`}>

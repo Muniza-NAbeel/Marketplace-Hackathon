@@ -10,6 +10,7 @@ import { Cars } from "../app/types/car";
 import { popular } from "@/sanity/lib/queries";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const PopularCars: React.FC = () => {
   const [cars, setCars] = useState<Cars[]>([]);
@@ -21,6 +22,14 @@ const PopularCars: React.FC = () => {
     }
     fetchCars();
   }, []);
+
+  if (!cars) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <ClipLoader color="#3563E9" size={50} />
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-[1440px] h-auto gap-[20px] p-4">
@@ -39,7 +48,7 @@ const PopularCars: React.FC = () => {
         {cars.map((car) => (
           <div
             key={car._id}
-            className="border rounded-lg shadow-lg p-4 flex flex-col bg-white h-full"
+            className="border rounded-lg shadow-lg p-4 flex flex-col bg-white h-full duration-100 hover:scale-95"
           >
             <Link href={`/cars/${car._id}`}>
               <div className="flex justify-between items-center mb-2">

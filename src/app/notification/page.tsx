@@ -38,7 +38,7 @@ const Notification: React.FC = () => {
         {cartItems.map((item: CartItem) => (
           <div
             key={item.id}
-            className="lg:w-4/5 mx-auto flex flex-wrap bg-white rounded-lg shadow-lg p-6 mb-8"
+            className="lg:w-4/5 mx-auto flex flex-wrap bg-white rounded-lg shadow-lg p-6 mb-8 duration-100 hover:scale-95"
           >
             {/* Image Section */}
             <div className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded">
@@ -101,7 +101,7 @@ const Notification: React.FC = () => {
               </p>
 
               {/* Price and Buttons */}
-              <div className="flex items-center justify-between">
+              <div className="flex flex-wrap items-center justify-between">
                 <span className="title-font font-medium text-2xl text-gray-900">
                   {item.pricePerDay}
                 </span>
@@ -121,14 +121,14 @@ const Notification: React.FC = () => {
                       }
                     });
                   }}
-                  className="flex ml-auto text-white bg-[#3563E9] border-0 py-2 px-6 focus:outline-none hover:bg-red rounded"
+                  className="flex lg:ml-auto text-white bg-[#3563E9] border-0 py-2 px-6 focus:outline-none hover:bg-red rounded "
                 >
                   Confirm
                 </button>
 
                 <button
                   onClick={() => handleRemove(item.id)}
-                  className="flex ml-6 text-white bg-red border-0 py-2 px-6 focus:outline-none hover:bg-[#688af0] rounded"
+                  className="flex w-full lg:w-auto text-white bg-red border-0 py-2 px-6 focus:outline-none hover:bg-[#688af0] rounded mt-4 lg:ml-auto item-center lg:mt-0"
                 >
                   Remove
                 </button>

@@ -12,6 +12,7 @@ import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { useDispatch } from "react-redux";
 import { add } from "@/redux/CarSlice";
+import ClipLoader from "react-spinners/ClipLoader";
 
 const RentalForm = () => {
   const { id } = useParams();
@@ -37,8 +38,13 @@ const RentalForm = () => {
     fetchCarDetails();
   }, [id]);
 
-  if (!car) return <div>Loading...</div>;
-
+  if (!car) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <ClipLoader color="#3563E9" size={50} />
+      </div>
+    );
+  }
   const handleAddToCart = () => {
     if (car) {
       dispatch(
