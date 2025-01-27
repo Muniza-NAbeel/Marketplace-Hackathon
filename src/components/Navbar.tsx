@@ -66,7 +66,7 @@ export default function Navbar() {
         <div className="relative border-[1px] border-secondary-light rounded-full cursor-pointer p-2 hover:bg-[#54A6FF] shadow-md active:bg-slate-400 active:scale-95 transition-all">
           <IoMdSettings className="text-xl md:text-2xl text-secondary hover:text-white" />
         </div>
-        <Link href="/signup">
+        <Link href="/dashboard">
         <Image
           src="/profile.png"
           alt="profile"

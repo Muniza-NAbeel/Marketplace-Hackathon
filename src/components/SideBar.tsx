@@ -1,20 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 
-const Sidebar = () => {
-  // States for checkboxes
-  const [selectedTypes, setSelectedTypes] = useState(["Sport", "SUV"]);
-  const [selectedCapacity, setSelectedCapacity] = useState([
-    "2 Person",
-    "8 or More",
-  ]);
+interface SidebarProps {
+  selectedTypes: string[];
+  setSelectedTypes: React.Dispatch<React.SetStateAction<string[]>>;
+  selectedseatingCapacity: string[];
+  setSelectedseatingCapacity: React.Dispatch<React.SetStateAction<string[]>>;
+}
 
-  // State for price slider
-  const [priceRange, setPriceRange] = useState(100);
-
-  // Generic function to handle checkbox changes
+const Sidebar: React.FC<SidebarProps> = ({
+  selectedTypes,
+  setSelectedTypes,
+  selectedseatingCapacity,
+  setSelectedseatingCapacity,
+}) => {
   const handleCheckboxChange = (
     option: string,
-    selectedOptions: string[],
+    _selectedOptions: string[],
     setSelectedOptions: React.Dispatch<React.SetStateAction<string[]>>
   ) => {
     setSelectedOptions((prev) =>
@@ -32,99 +33,66 @@ const Sidebar = () => {
       </h3>
       <ul>
         {[
-          { label: "Sport", count: 10 },
-          { label: "SUV", count: 12 },
-          { label: "MPV", count: 16 },
-          { label: "Sedan", count: 20 },
-          { label: "Coupe", count: 14 },
-          { label: "Hatchback", count: 14 },
-        ].map((option) => (
-          <li key={option.label} className="flex items-center mb-6">
+          "Sport",
+          "SUV",
+          "Sedan",
+          "Gasoline",
+          "Electric",
+          "Diesel",
+          "Hybrid",
+          "Hatchback",
+        ].map((type) => (
+          <li key={type} className="flex items-center mb-6">
             <input
               type="checkbox"
-              id={option.label}
-              checked={selectedTypes.includes(option.label)}
+              id={type}
+              checked={selectedTypes.includes(type)}
               onChange={() =>
-                handleCheckboxChange(
-                  option.label,
-                  selectedTypes,
-                  setSelectedTypes
-                )
+                handleCheckboxChange(type, selectedTypes, setSelectedTypes)
               }
               className="mr-3 w-5 h-5 accent-blue"
             />
             <label
-              htmlFor={option.label}
-              className="space-y-4 text-xl font-semibold text-gray-500"
+              htmlFor={type}
+              className="text-xl font-semibold text-gray-500"
             >
-              <span>{option.label}</span>
-              <span className="text-xl font-semibold text-gray-400">
-                {" "}
-                ({option.count})
-              </span>
+              {type}
             </label>
           </li>
         ))}
       </ul>
 
       {/* Capacity Section */}
-      <div className="mb-10 mt-10">
-        <h3 className="mb-10 text-sm tracking-tight font-semibold text-gray-400">
-          C A P A C I T Y
-        </h3>
-        <ul>
-          {[
-            { label: "2 Person", count: 10 },
-            { label: "4 Person", count: 14 },
-            { label: "6 Person", count: 12 },
-            { label: "8 or More", count: 16 },
-          ].map((option) => (
-            <li key={option.label} className="flex items-center mb-6">
+      <h3 className="mt-10 mb-6 text-md font-semibold text-gray-400">
+        C A P A C I T Y
+      </h3>
+      <ul>
+        {["2 People", "4 People", "5 People", "6 People", "7 or More"].map(
+          (seatingCapacity) => (
+            <li key={seatingCapacity} className="flex items-center mb-6">
               <input
                 type="checkbox"
-                id={option.label}
-                checked={selectedCapacity.includes(option.label)}
+                id={seatingCapacity}
+                checked={selectedseatingCapacity.includes(seatingCapacity)}
                 onChange={() =>
                   handleCheckboxChange(
-                    option.label,
-                    selectedCapacity,
-                    setSelectedCapacity
+                    seatingCapacity,
+                    selectedseatingCapacity,
+                    setSelectedseatingCapacity
                   )
                 }
                 className="mr-3 w-5 h-5 accent-blue"
               />
               <label
-                htmlFor={option.label}
-                className="space-y-4 text-xl font-semibold text-gray-500"
+                htmlFor={seatingCapacity}
+                className="text-xl font-semibold text-gray-500"
               >
-                <span>{option.label}</span>
-                <span className="text-xl font-semibold text-gray-400">
-                  {" "}
-                  ({option.count})
-                </span>
+                {seatingCapacity}
               </label>
             </li>
-          ))}
-        </ul>
-      </div>
-
-      {/* Price Range Section */}
-      <div className="mb-6 mt-10">
-        <h3 className="mb-6 text-sm font-semibold text-gray-400">P R I C E</h3>
-        <input
-          type="range"
-          min="0"
-          max="150"
-          value={priceRange}
-          onChange={(e) => setPriceRange(Number(e.target.value))}
-          className="w-full accent-blue"
-        />
-        <div className="flex justify-between items-center mb-4">
-          <span className="space-y-4 text-xl font-semibold text-gray-500">
-            Max. ${priceRange}.00
-          </span>
-        </div>
-      </div>
+          )
+        )}
+      </ul>
     </div>
   );
 };
