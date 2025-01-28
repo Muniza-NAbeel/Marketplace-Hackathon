@@ -1,6 +1,5 @@
 'use client';
-import { CiSearch } from "react-icons/ci";
-import { CiSliderHorizontal } from "react-icons/ci";
+
 import { FaHeart } from "react-icons/fa6";
 import { GoBellFill } from "react-icons/go";
 import { IoMdSettings } from "react-icons/io";
@@ -8,6 +7,7 @@ import Image from "next/image";
 import { RootState } from "@/redux/store";
 import { useSelector } from "react-redux";
 import Link from "next/link";
+import SearchBar from "./SearchBar";
 
 
 export default function Navbar() {
@@ -32,17 +32,7 @@ export default function Navbar() {
         />
 
         {/* Search Bar */}
-        <div className="relative md:ml-[202px] flex items-center mt-4 md:mt-0 w-full md:w-auto">
-          <CiSearch className="absolute left-4 text-[#C3D4E9] text-xl md:text-3xl" />
-          <input
-            type="text"
-            placeholder="Search something here"
-            className="border-[1px] border-secondary rounded-[70px] w-full md:w-[492px] h-[40px] md:h-[44px] px-12 py-2 text-sm focus:outline-none"
-          />
-          <button className="absolute right-3 text-[#C3D4E9]">
-            <CiSliderHorizontal className="text-xl md:text-3xl" />
-          </button>
-        </div>
+        <SearchBar/>
       </div>
 
       {/* Right Section */}
