@@ -1,43 +1,12 @@
 "use client";
-
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { client } from "@/sanity/lib/client";
 import Image from "next/image";
 import { Cars } from "../../types/car";
-import RecommendationCars from "@/components/RecommendationCars";
 import Link from "next/link";
-import { RiArrowDropDownLine } from "react-icons/ri";
-import { ReviewCard } from "@/components/Cardetail/ReviewCard";
 import { urlFor } from "@/sanity/lib/image";
-import { ReviewType } from "@/components/Cardetail/types";
 import ClipLoader from "react-spinners/ClipLoader";
-
-
-
-const reviews: ReviewType[] = [
-  {
-    id: "1",
-    name: "Alex Stanton",
-    role: "CEO at Bukalapak",
-    date: "21 July 2022",
-    rating: 4,
-    avatar: "/review1.png",
-    comment:
-      "We are very happy with the service from the MORENT App. Morent has a low price and also a large variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.",
-  },
-  {
-    id: "2",
-    name: "Skylar Dias",
-    role: "CEO at Amazon",
-    date: "20 July 2022",
-    rating: 4,
-    avatar: "/review.png",
-    comment:
-      "We are greatly helped by the services of the MORENT Application. Morent has low prices and also a wide variety of cars with good and comfortable facilities. In addition, the service provided by the officers is also very friendly and very polite.",
-  },
-];
-
 
 const CarDetails = () => {
   const { id } = useParams();
@@ -71,15 +40,9 @@ const CarDetails = () => {
     );
   }
   return (
-    <section className="overflow-hidden pl-4 lg:pr-8 bg-[#F6F7F9] max-md:pr-5">
+    <section className="overflow-hidden pl-4 mb-10 mt-10 lg:pr-8 bg-[#F6F7F9] max-md:pr-5">
       {/*==========>>>>>>>> Sidebar <<<<<<<<<<====== */}
       <div className="grid grid-cols-3 gap-5 max-md:flex max-md:flex-col h">
-        {/* <div className="col-span-1 ">
-        <div className="hidden md:flex flex-col overflow-hidden items-start px-8 pt-8 bg-white border-r border-solid border-r-gray-100 h-[1500px] max-md:px-5 max-md:pb-24 max-md:mt-8">
-
-          <SideBar />
-          </div>
-        </div> */}
         <div className="col-span-3 flex flex-col ml:3 lg:ml-14 lg:gap-8">
           <div className="flex flex-wrap lg:flex-nowrap gap-4 lg:gap-8 bg-white rounded-lg overflow-hidden">
             {/* Left Section */}
@@ -181,12 +144,14 @@ const CarDetails = () => {
                 </div>
               </div>
               <div className="flex justify-between items-center pt-2 mb-4 max-sm:flex-row max-sm:items-center max-sm:gap-2">
-                <div>
-                  <p className="text-xl font-[700] text-[#1A202C] max-sm:text-lg">
-                    {car?.pricePerDay}
+                <div className="flex-col mt-4">
+                  <h1 className="text-[#90A3BF] font-[200] text-[18px] leading-[30px] tracking-[-2%] max-sm:text-[12px]">Discount Price</h1>
+                  <p className="text-[14px] text-[#1A202C]  leading-[30px] tracking-[-2%] max-sm:text-[12px]">
+                     {car?.pricePerDay}
                   </p>
-
-                  <span className="line-through text-[#90A3BF] max-sm:text-sm">
+                  
+                  <h1 className="text-[#90A3BF] font-[200] text-[18px] leading-[30px] tracking-[-2%] max-sm:text-[12px]">Original Price</h1>
+                  <span className="line-through text-[14px] text-[#1A202C]  leading-[30px] mt-2 tracking-[-2%] max-sm:text-[12px]">
                     {car?.originalPrice} {/* Display original price */}
                   </span>
                 </div>
@@ -209,56 +174,6 @@ const CarDetails = () => {
             </div>
           </div>
 
-          <div className="flex overflow-hidden flex-col p-6 mt-8 w-full bg-white rounded-xl max-md:px-3 max-md:max-w-full">
-            <div className="flex gap-3 items-start self-start whitespace-nowrap">
-              <div className="w-20 text-xl font-medium tracking-tight text-[#1A202C] max-md:text-lg">
-                Reviews
-              </div>
-              <div className="gap-2 self-stretch px-3 py-1 w-11 text-sm font-bold text-center text-white bg-blue rounded min-h-[28px]">
-                13
-              </div>
-            </div>
-
-            <div className="flex flex-col gap-6 mt-8 max-md:mt-4">
-              {reviews.map((review) => (
-                <ReviewCard key={review.id} review={review} />
-              ))}
-            </div>
-
-            <Link href={"/payment"}>
-              <button className="flex gap-1 justify-center items-center self-center px-2 py-2 mt-4 ml-3 w-full text-base font-medium tracking-tight text-center rounded min-h-[44px] text-slate-400 sm:w-[132px] hover:text-blue max-md:mt-2 max-md:flex max-md:justify-center max-md:self-center">
-                <span className="self-stretch my-auto w-[68px] max-md:text-sm">
-                  Show All
-                </span>
-
-                <RiArrowDropDownLine className="text-4xl object-contain shrink-0 self-stretch my-auto w-8 aspect-square max-md:text-3xl" />
-              </button>
-            </Link>
-          </div>
-
-          {/* Recommendation Cars */}
-
-          <div className="flex flex-col p-2 mt-8 lg:mt-2 lg:p-6 lg:mb-20 max-md:max-w-full">
-            <div className="flex gap-10 items-center justify-between flex-wrap text-base font-semibold tracking-tight text-center max-md:max-w-full">
-              <div className="text-md w-auto text-[#90A3BF]">
-                Recomendation Car
-              </div>
-
-              <Link href={"/categories"} className="hover:cursor-pointer">
-                <h2 className="text-[#3563E9] text-md font-semibold leading-[20.16px] hover:underline underline-offset-1 hover:text-[#3895ff] active:text-secondary active:scale-95 transition-all hover:cursor-pointer">
-                  View All
-                </h2>
-              </Link>
-            </div>
-            <div className="mt-0">
-              <RecommendationCars
-                showHeading={false}
-                cardsPerRow={4}
-                limit={4}
-              />
-              
-            </div>
-          </div>
         </div>
       </div>
     </section>

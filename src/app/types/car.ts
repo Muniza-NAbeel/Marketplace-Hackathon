@@ -1,6 +1,4 @@
 
-
-
 export interface Cars {
     _id: number;
     name: string;

@@ -26,7 +26,7 @@ export default function HeroSection() {
             a low price.
           </p>
 
-          <Link href={"/payment"}>
+          <Link href={"/categories"}>
             <button className="mt-4 bg-[#3563E9] text-white w-[120px] h-[44px] rounded-[4px] px-[20px] gap-[8px] hover:bg-[#4f85c2] active:bg-[#3563E9] active-scale-95 transition-all">
               Rental Car
             </button>
@@ -77,8 +77,6 @@ export default function HeroSection() {
 
     {/* div for pickup and drop off */}
   
-
-
       <div className="flex flex-col md:flex-row items-center justify-between md:gap-32 max-sm:gap-5 mt-[32px] relative ">
         {/* Main Container */}
         <div className="flex flex-col lg:flex-row justify-center items-center gap-0 lg:gap-8 p-4 ">

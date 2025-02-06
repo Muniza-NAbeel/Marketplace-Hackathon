@@ -11,9 +11,9 @@ import { BiAperture } from "react-icons/bi";
 import { FaGasPump } from "react-icons/fa6";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
-import { IoMdHeartEmpty } from "react-icons/io";
 import { useSearchParams } from "next/navigation";
 import { Cars } from "@/app/types/car";
+import Swal from "sweetalert2";
 
 const Categories: React.FC = () => {
   const [cars, setCars] = useState<Cars[]>([]);
@@ -23,6 +23,7 @@ const Categories: React.FC = () => {
     string[]
   >([]);
   const [search, setSearch] = useState<string | null>(null);
+  const [wishlist, setWishlist] = useState<string[]>([]); 
 
   // Get search params from the URL
   const searchParams = useSearchParams();
@@ -39,6 +40,12 @@ const Categories: React.FC = () => {
       setCars(fetchedCars);
       setFilteredCars(fetchedCars); 
     }
+
+    const storedWishlist = localStorage.getItem("wishlist");
+    if (storedWishlist) {
+      setWishlist(JSON.parse(storedWishlist));
+    }
+
     fetchCars();
   }, []);
 
@@ -67,6 +74,40 @@ const Categories: React.FC = () => {
 
     setFilteredCars(filtered);
   }, [selectedTypes, selectedSeatingCapacity, search, cars]);
+
+
+  const toggleWishlist = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    productId: string
+  ) => {
+    e.preventDefault();
+    
+    setWishlist((prevWishlist) => {
+      const updatedWishlist = prevWishlist.includes(productId)
+        ? prevWishlist.filter((id) => id !== productId) // Remove
+        : [...prevWishlist, productId]; // Add
+  
+      // Store the updated wishlist in localStorage
+      localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+      return updatedWishlist;
+    });
+  
+    // Show SweetAlert after the wishlist is updated
+    Swal.fire({
+      title: "Success!",
+      text: "Item has been added to your wishlist!",
+      icon: "success",
+      showCancelButton: false,
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "Go to wishlist",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Redirect to categories page when button is clicked
+        window.location.href = "/wishlist";  // Replace "/categories" with your actual categories page URL
+      }
+    });
+  };
+
 
   if (!cars.length) {
     return (
@@ -104,6 +145,17 @@ const Categories: React.FC = () => {
                     <div className="flex justify-between items-center mb-2">
                       <h3 className="flex w-full h-[24px] font-semibold text-[16px] leading-[20.16px] text-[#1A202C] justify-between items-center">
                         {car.name}
+                        <div>
+                        <button
+                    onClick={(e) => toggleWishlist(e, car._id.toString())}
+                    className={`ml-4 text-3xl ${wishlist.includes(car._id.toString()) ? "text-red" : "text-gray-300"}`}
+                  >
+                   ♥
+                  </button>
+                  </div>
+
+
+{/* 
                         {car.name === "Koenigsegg" ||
                         car.name === "Rolls-Royce" ? (
                           <Image
@@ -114,7 +166,7 @@ const Categories: React.FC = () => {
                           />
                         ) : (
                           <IoMdHeartEmpty className="text-black w-5 h-5" />
-                        )}
+                        )} */}
                       </h3>
                     </div>
                     <p className="text-[#90A3BF] font-[600] text-sm">

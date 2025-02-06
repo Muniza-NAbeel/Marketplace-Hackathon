@@ -1,29 +1,71 @@
-'use client';
+"use client";
 import Image from "next/image";
-import { IoMdHeartEmpty } from "react-icons/io";
 import { FaGasPump } from "react-icons/fa";
 import { BiAperture } from "react-icons/bi";
 import { BsFillPeopleFill } from "react-icons/bs";
-import Link from 'next/link';
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Cars } from "../app/types/car";
 import { popular } from "@/sanity/lib/queries";
 import { client } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import ClipLoader from "react-spinners/ClipLoader";
+import Swal from "sweetalert2";
 
 const PopularCars: React.FC = () => {
   const [cars, setCars] = useState<Cars[]>([]);
+  const [wishlist, setWishlist] = useState<string[]>([]);
 
   useEffect(() => {
     async function fetchCars() {
-      const fetchedCars: Cars[] = await client.fetch(popular, {Cache: "no-cache"});
-      setCars(fetchedCars); 
+      const fetchedCars: Cars[] = await client.fetch(popular, {
+        Cache: "no-cache",
+      });
+      setCars(fetchedCars);
     }
+
+    const storedWishlist = localStorage.getItem("wishlist");
+    if (storedWishlist) {
+      setWishlist(JSON.parse(storedWishlist));
+    }
+
     fetchCars();
   }, []);
 
-  if (!cars) {
+  const toggleWishlist = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    productId: string
+  ) => {
+    e.preventDefault();
+    
+    setWishlist((prevWishlist) => {
+      const updatedWishlist = prevWishlist.includes(productId)
+        ? prevWishlist.filter((id) => id !== productId) // Remove
+        : [...prevWishlist, productId]; // Add
+  
+      // Store the updated wishlist in localStorage
+      localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+      return updatedWishlist;
+    });
+  
+    // Show SweetAlert after the wishlist is updated
+    Swal.fire({
+      title: "Success!",
+      text: "Item has been added to your wishlist!",
+      icon: "success",
+      showCancelButton: false,
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "Go to wishlist",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Redirect to categories page when button is clicked
+        window.location.href = "/wishlist";  // Replace "/categories" with your actual categories page URL
+      }
+    });
+  };
+  
+
+  if (!cars.length) {
     return (
       <div className="flex items-center justify-center h-screen">
         <ClipLoader color="#3563E9" size={50} />
@@ -43,7 +85,7 @@ const PopularCars: React.FC = () => {
           </h2>
         </Link>
       </div>
-      
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
         {cars.map((car) => (
           <div
@@ -54,11 +96,12 @@ const PopularCars: React.FC = () => {
               <div className="flex justify-between items-center mb-2">
                 <h3 className="flex w-full h-[24px] font-semibold text-[16px] leading-[20.16px] text-[#1A202C] justify-between items-center">
                   {car.name}
-                  {car.name === "Koenigsegg" || car.name === "Rolls-Royce" ? (
-                    <Image src="/redheart.png" alt="Heart" height={20} width={20} />
-                  ) : (
-                    <IoMdHeartEmpty className="text-black w-5 h-5" />
-                  )}
+                  <button
+                    onClick={(e) => toggleWishlist(e, car._id.toString())}
+                    className={`ml-4 text-3xl ${wishlist.includes(car._id.toString()) ? "text-red" : "text-gray-300"}`}
+                  >
+                   ♥
+                  </button>
                 </h3>
               </div>
               <p className="text-[#90A3BF] font-[600] text-sm">{car.type}</p>
@@ -98,9 +141,7 @@ const PopularCars: React.FC = () => {
                     </div>
                   )}
                 </div>
-                <button
-                  className="bg-[#3563E9] text-white w-[116px] h-[44px] rounded-[4px] px-[20px] gap-[8px] hover:bg-[#3895ff] active:bg-[#3563E9] active-scale-95 transition-all"
-                >
+                <button className="bg-[#3563E9] text-white w-[116px] h-[44px] rounded-[4px] px-[20px] gap-[8px] hover:bg-[#3895ff] active:bg-[#3563E9] active-scale-95 transition-all">
                   Rent Now
                 </button>
               </div>
@@ -113,4 +154,3 @@ const PopularCars: React.FC = () => {
 };
 
 export default PopularCars;
-

@@ -3,7 +3,6 @@ import Image from "next/image";
 import { BiAperture } from "react-icons/bi";
 import { BsFillPeopleFill } from "react-icons/bs";
 import { FaGasPump } from "react-icons/fa";
-import { IoMdHeartEmpty } from "react-icons/io";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Cars } from "../app/types/car";
@@ -11,6 +10,7 @@ import { client } from "@/sanity/lib/client";
 import { recommendedCars } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import ClipLoader from "react-spinners/ClipLoader";
+import Swal from "sweetalert2";
 
 interface RecommendationCarsProps {
   showHeading?: boolean;
@@ -27,6 +27,8 @@ export default function RecommendationCars({
 }: RecommendationCarsProps) {
   const [cars, setCars] = useState<Cars[]>([]); 
   const [showMore, setShowMore] = useState(false);
+  const [wishlist, setWishlist] = useState<string[]>([]); 
+
 
   // Fetch cars data from the backend
   useEffect(() => {
@@ -34,8 +36,46 @@ export default function RecommendationCars({
       const fetchedCars: Cars[] = await client.fetch(recommendedCars, {Cache:"no-Cache"});
       setCars(fetchedCars); 
     }
+
+    const storedWishlist = localStorage.getItem("wishlist");
+    if (storedWishlist) {
+      setWishlist(JSON.parse(storedWishlist));
+    }
+
     fetchCars();
   }, []);
+
+   const toggleWishlist = (
+     e: React.MouseEvent<HTMLButtonElement>,
+     productId: string
+   ) => {
+     e.preventDefault();
+     
+     setWishlist((prevWishlist) => {
+       const updatedWishlist = prevWishlist.includes(productId)
+         ? prevWishlist.filter((id) => id !== productId) // Remove
+         : [...prevWishlist, productId]; // Add
+   
+       // Store the updated wishlist in localStorage
+       localStorage.setItem("wishlist", JSON.stringify(updatedWishlist));
+       return updatedWishlist;
+     });
+   
+     // Show SweetAlert after the wishlist is updated
+     Swal.fire({
+       title: "Success!",
+       text: "Item has been added to your wishlist!",
+       icon: "success",
+       showCancelButton: false,
+       confirmButtonColor: "#3085d6",
+       confirmButtonText: "Go to wishlist",
+     }).then((result) => {
+       if (result.isConfirmed) {
+         // Redirect to categories page when button is clicked
+         window.location.href = "/wishlist";  // Replace "/categories" with your actual categories page URL
+       }
+     });
+   };
 
   // Determine which cars to show based on the 'showMore' state
   const carsToShow = showMore ? cars : cars.slice(0, limit);
@@ -78,18 +118,14 @@ export default function RecommendationCars({
               <h3 className="text-[#1A202C] font-semibold text-[16px]">
                 {car.name}
               </h3>
-              {["Ford Mustang", "Audi A6", "CR-V", "Porsche 911", "Rolls-Royce"].includes(
-                car.name
-              ) ? (
-                <Image
-                  src="/redheart.png"
-                  alt="Heart"
-                  height={20}
-                  width={20}
-                />
-              ) : (
-                <IoMdHeartEmpty className="text-black w-5 h-5" />
-              )}
+              <div>
+              <button
+                    onClick={(e) => toggleWishlist(e, car._id.toString())}
+                    className={`ml-4 text-3xl ${wishlist.includes(car._id.toString()) ? "text-red" : "text-gray-300"}`}
+                  >
+                   ♥
+                  </button>
+                  </div>
             </div>
 
             {/* Car Type */}

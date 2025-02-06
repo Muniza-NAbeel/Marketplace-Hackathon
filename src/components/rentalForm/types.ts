@@ -1,8 +1,10 @@
 export interface InputFieldProps {
-    label: string;
-    placeholder: string;
-    type?: string;
-    className: string;
+  type: string;
+  label: string;
+  placeholder: string;
+  value: string; // Ensure value is typed as string
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void; // onChange handler
+  className: string;
   }
   
   export interface StepHeaderProps {
@@ -14,6 +16,7 @@ export interface InputFieldProps {
   export interface SelectFieldProps {
     label: string;
     placeholder: string;
+  
   }
   
   export interface PaymentMethodProps {
